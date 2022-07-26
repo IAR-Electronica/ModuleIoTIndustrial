@@ -11,10 +11,12 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+#define ROUTER_SSID "" 
+#define ROUTER_PASSWORD "" 
 
-#include "mdf_common.h"
+#include "archivo.c"
 #include "mwifi.h"
-
+#include "mdf_common.h"
 // #define MEMORY_DEBUG
 
 static const char *TAG = "get_started";
@@ -77,7 +79,6 @@ static void node_read_task(void *arg)
     }
 
     MDF_LOGW("Note read task is exit");
-
     MDF_FREE(data);
     vTaskDelete(NULL);
 }
@@ -208,6 +209,8 @@ void app_main()
 {
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT();
     mwifi_config_t config   = {
+        .router_ssid = ROUTER_SSID, 
+        .router_password  = ROUTER_PASSWORD , 
         .channel   = CONFIG_MESH_CHANNEL,
         .mesh_id   = CONFIG_MESH_ID,
         .mesh_type = CONFIG_DEVICE_TYPE,
@@ -240,8 +243,9 @@ void app_main()
         xTaskCreate(node_read_task, "node_read_task", 4 * 1024,
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
     }
-
-    TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
-                                       true, NULL, print_system_info_timercb);
-    xTimerStart(timer, 0);
+     //  xTaskCreate(vTaskGetADC, "taskADC", 3 * 1024,
+     //               NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY-1, NULL);
+    //TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
+     //                                  true, NULL, print_system_info_timercb);
+    //xTimerStart(timer, 0);
 }

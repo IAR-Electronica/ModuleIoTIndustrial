@@ -1,6 +1,15 @@
+#include <ADS1115.h>
 #include <stdio.h>
 
-void testCode(){
-    int a = 5 ;
-    printf("haaaa!\r\n") ; 
+
+void vTaskGetADC(void *pv){
+    float voltage ; 
+    ///!adc_init ! 
+    while(1){
+        voltage =getVoltage() ; 
+        printf("voltage: %f",voltage ) ; 
+    }
+
+    //! tirar abajo la tarea 
 }
+

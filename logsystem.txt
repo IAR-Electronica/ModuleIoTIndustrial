@@ -1,0 +1,250 @@
+Executing action: monitor
+Serial port /dev/ttyUSB0
+Connecting.......................
+/dev/ttyUSB0 failed to connect: Failed to connect to Espressif device: No serial data received.
+For troubleshooting steps visit: https://docs.espressif.com/projects/esptool/en/latest/troubleshooting.html
+Serial port /dev/ttyS1
+/dev/ttyS1 failed to connect: [Errno 13] could not open port /dev/ttyS1: [Errno 13] Permission denied: '/dev/ttyS1'
+Serial port /dev/ttyS0
+/dev/ttyS0 failed to connect: [Errno 13] could not open port /dev/ttyS0: [Errno 13] Permission denied: '/dev/ttyS0'
+[0;32mI (202107) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (123) Hello root![0m
+[0;32mI (202117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (195) json_data!![0m
+[0;32mI (203117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (124) Hello root![0m
+[0;32mI (203117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (196) json_data!![0m
+[0;32mI (204107) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (125) Hello root![0m
+[0;32mI (204117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (197) json_data!![0m
+[0;32mI (205117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (126) Hello root![0m
+[0;32mI (205117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (198) json_data!![0m
+[0;32mI (206107) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (127) Hello root![0m
+[0;32mI (206117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (199) json_data!![0m
+[0;32mI (207117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (128) Hello root![0m
+[0;32mI (207127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (200) json_data!![0m
+[0;32mI (208107) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (129) Hello root![0m
+[0;32mI (208117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (201) json_data!![0m
+[0;32mI (209117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (130) Hello root![0m
+[0;32mI (209127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (202) json_data!![0m
+[0;32mI (210107) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (131) Hello root![0m
+[0;32mI (210117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (203) json_data!![0m
+[0;32mI (211117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (132) Hello root![0m
+[0;32mI (211117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (204) json_data!![0m
+[0;32mI (212107) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (133) Hello root![0m
+[0;32mI (212117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (205) json_data!![0m
+[0;32mI (213117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (134) Hello root![0m
+[0;32mI (213127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (206) json_data!![0m
+[0;32mI (214107) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (135) Hello root![0m
+[0;32mI (214117) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (207) json_data!![0m
+[0;32mI (215117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (136) Hello root![0m
+[0;32mI (215127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (208) json_data!![0m
+[0;32mI (216117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (137) Hello root![0m
+[0;32mI (216127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (209) json_data!![0m
+[0;32mI (217127) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (138) Hello root![0m
+[0;32mI (217127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (210) json_data!![0m
+[0;32mI (218117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (139) Hello root![0m
+[0;32mI (218127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (211) json_data!![0m
+[0;32mI (219127) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (140) Hello root![0m
+[0;32mI (219127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (212) json_data!![0m
+[0;32mI (220117) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (141) Hello root![0m
+[0;32mI (220127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (213) json_data!![0m
+[0;32mI (221127) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (142) Hello root![0m
+[0;32mI (221127) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (214) json_data!![0m
+[0;32mI (222127) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (143) Hello root![0m
+[0;32mI (222137) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (215) json_data!![0m
+[0;32mI (223137) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (144) Hello root![0m
+[0;32mI (223137) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (216) json_data!![0m
+[0;32mI (224127) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (145) Hello root![0m
+[0;32mI (224137) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (217) json_data!![0m
+[0;32mI (225137) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (146) Hello root![0m
+[0;32mI (225137) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (218) json_data!![0m
+[0;32mI (226127) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (147) Hello root![0m
+[0;32mI (226137) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (219) json_data!![0m
+[0;32mI (227137) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (148) Hello root![0m
+[0;32mI (227147) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (220) json_data!![0m
+[0;32mI (228137) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (149) Hello root![0m
+[0;32mI (228147) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (221) json_data!![0m
+[0;32mI (229147) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (150) Hello root![0m
+[0;32mI (229147) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (222) json_data!![0m
+[0;32mI (230147) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (151) Hello root![0m
+[0;32mI (230147) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (223) json_data!![0m
+[0;32mI (231147) [get_started, 44]: Root receive, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (152) Hello root![0m
+[0;32mI (231157) [get_started, 49]: Root send, addr: 94:b9:7e:e8:d7:0c, size: 17, data: (224) json_data!![0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6612
+load:0x40078000,len:14788
+load:0x40080400,len:3792
+entry 0x40080694
+[0;32mI (26) boot: ESP-IDF v4.4.1-dirty 2nd stage bootloader[0m
+[0;32mI (26) boot: compile time 16:37:24[0m
+[0;32mI (27) boot: chip revision: 1[0m
+[0;32mI (30) boot_comm: chip revision: 1, min. bootloader chip revision: 0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (46) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (56) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (67) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (74) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (82) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (89) boot: End of partition table[0m
+[0;32mI (93) boot_comm: chip revision: 1, min. application chip revision: 0[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=20df0h (134640) map[0m
+[0;32mI (158) esp_image: segment 1: paddr=00030e18 vaddr=3ffb0000 size=038fch ( 14588) load[0m
+[0;32mI (164) esp_image: segment 2: paddr=0003471c vaddr=40080000 size=0b8fch ( 47356) load[0m
+[0;32mI (184) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=9e980h (649600) map[0m
+[0;32mI (419) esp_image: segment 4: paddr=000de9a8 vaddr=4008b8fc size=0905ch ( 36956) load[0m
+[0;32mI (434) esp_image: segment 5: paddr=000e7a0c vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (445) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (445) boot: Disabling RNG early entropy source...[0m
+[0;32mI (457) cpu_start: Pro cpu up.[0m
+[0;32mI (457) cpu_start: Starting app cpu, entry point is 0x400811f8[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (471) cpu_start: Pro cpu start user code[0m
+[0;32mI (471) cpu_start: cpu freq: 160000000[0m
+[0;32mI (471) cpu_start: Application information:[0m
+[0;32mI (476) cpu_start: Project name:     new_prh[0m
+[0;32mI (480) cpu_start: App version:      5fabb16-dirty[0m
+[0;32mI (486) cpu_start: Compile time:     Jul 26 2022 16:37:16[0m
+[0;32mI (492) cpu_start: ELF file SHA256:  a2c58bd10e479292...[0m
+[0;32mI (498) cpu_start: ESP-IDF:          v4.4.1-dirty[0m
+[0;32mI (504) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (511) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (517) heap_init: At 3FFB8790 len 00027870 (158 KiB): DRAM[0m
+[0;32mI (523) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (529) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (536) heap_init: At 40094958 len 0000B6A8 (45 KiB): IRAM[0m
+[0;32mI (543) spi_flash: detected chip: generic[0m
+[0;32mI (547) spi_flash: flash io: dio[0m
+[0;32mI (552) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+I (667) wifi:wifi driver task: 3ffc2cd4, prio:23, stack:6656, core=0
+[0;32mI (667) system_api: Base MAC address is not set[0m
+[0;32mI (667) system_api: read default base MAC address from EFUSE[0m
+I (697) wifi:wifi firmware version: 63017e0
+I (697) wifi:wifi certification version: v7.0
+I (697) wifi:config NVS flash: enabled
+I (697) wifi:config nano formating: disabled
+I (697) wifi:Init data frame dynamic rx buffer num: 32
+I (707) wifi:Init management frame dynamic rx buffer num: 32
+I (707) wifi:Init management short buffer num: 32
+I (717) wifi:Init dynamic tx buffer num: 32
+I (717) wifi:Init static rx buffer size: 1600
+I (717) wifi:Init static rx buffer num: 10
+I (727) wifi:Init dynamic rx buffer num: 32
+[0;32mI (727) wifi_init: rx ba win: 6[0m
+[0;32mI (737) wifi_init: tcpip mbox: 32[0m
+[0;32mI (737) wifi_init: udp mbox: 6[0m
+[0;32mI (737) wifi_init: tcp mbox: 6[0m
+[0;32mI (747) wifi_init: tcp tx win: 5744[0m
+[0;32mI (747) wifi_init: tcp rx win: 5744[0m
+[0;32mI (757) wifi_init: tcp mss: 1440[0m
+[0;32mI (757) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (757) wifi_init: WiFi RX IRAM OP enabled[0m
+I (777) wifi:Set ps type: 0
+
+[0;32mI (777) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+
+Brownout detector was triggered
+
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6612
+load:0x40078000,len:14788
+load:0x40080400,len:3792
+entry 0x40080694
+[0;32mI (27) boot: ESP-IDF v4.4.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 16:37:24[0m
+[0;32mI (27) boot: chip revision: 1[0m
+[0;32mI (30) boot_comm: chip revision: 1, min. bootloader chip revision: 0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (67) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (82) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (94) boot_comm: chip revision: 1, min. application chip revision: 0[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=20df0h (134640) map[0m
+[0;32mI (158) esp_image: segment 1: paddr=00030e18 vaddr=3ffb0000 size=038fch ( 14588) load[0m
+[0;32mI (164) esp_image: segment 2: paddr=0003471c vaddr=40080000 size=0b8fch ( 47356) load[0m
+[0;32mI (184) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=9e980h (649600) map[0m
+[0;32mI (419) esp_image: segment 4: paddr=000de9a8 vaddr=4008b8fc size=0905ch ( 36956) load[0m
+[0;32mI (435) esp_image: segment 5: paddr=000e7a0c vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (445) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (445) boot: Disabling RNG early entropy source...[0m
+[0;32mI (457) cpu_start: Pro cpu up.[0m
+[0;32mI (458) cpu_start: Starting app cpu, entry point is 0x400811f8[0m
+[0;32mI (444) cpu_start: App cpu up.[0m
+[0;32mI (472) cpu_start: Pro cpu start user code[0m
+[0;32mI (472) cpu_start: cpu freq: 160000000[0m
+[0;32mI (472) cpu_start: Application information:[0m
+[0;32mI (476) cpu_start: Project name:     new_prh[0m
+[0;32mI (481) cpu_start: App version:      5fabb16-dirty[0m
+[0;32mI (487) cpu_start: Compile time:     Jul 26 2022 16:37:16[0m
+[0;32mI (493) cpu_start: ELF file SHA256:  a2c58bd10e479292...[0m
+[0;32mI (499) cpu_start: ESP-IDF:          v4.4.1-dirty[0m
+[0;32mI (504) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (511) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (517) heap_init: At 3FFB8790 len 00027870 (158 KiB): DRAM[0m
+[0;32mI (524) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (530) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (536) heap_init: At 40094958 len 0000B6A8 (45 KiB): IRAM[0m
+[0;32mI (544) spi_flash: detected chip: generic[0m
+[0;32mI (547) spi_flash: flash io: dio[0m
+[0;32mI (552) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+I (668) wifi:wifi driver task: 3ffc2cd4, prio:23, stack:6656, core=0
+[0;32mI (668) system_api: Base MAC address is not set[0m
+[0;32mI (668) system_api: read default base MAC address from EFUSE[0m
+I (698) wifi:wifi firmware version: 63017e0
+I (698) wifi:wifi certification version: v7.0
+I (698) wifi:config NVS flash: enabled
+I (698) wifi:config nano formating: disabled
+I (698) wifi:Init data frame dynamic rx buffer num: 32
+I (708) wifi:Init management frame dynamic rx buffer num: 32
+I (708) wifi:Init management short buffer num: 32
+I (718) wifi:Init dynamic tx buffer num: 32
+I (718) wifi:Init static rx buffer size: 1600
+I (718) wifi:Init static rx buffer num: 10
+I (728) wifi:Init dynamic rx buffer num: 32
+[0;32mI (728) wifi_init: rx ba win: 6[0m
+[0;32mI (738) wifi_init: tcpip mbox: 32[0m
+[0;32mI (738) wifi_init: udp mbox: 6[0m
+[0;32mI (738) wifi_init: tcp mbox: 6[0m
+[0;32mI (748) wifi_init: tcp tx win: 5744[0m
+[0;32mI (748) wifi_init: tcp rx win: 5744[0m
+[0;32mI (758) wifi_init: tcp mss: 1440[0m
+[0;32mI (758) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (758) wifi_init: WiFi RX IRAM OP enabled[0m
+I (768) wifi:Set ps type: 0
+
+[0;32mI (768) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+I (878) wifi:mode : sta (10:52:1c:75:81:30)
+I (878) wifi:enable tsf
+[0;32mI (878) [mwifi, 298]: esp-mdf version: v1.0-156-gcf50274[0m
+I (888) wifi:mode : sta (10:52:1c:75:81:30) + softAP (10:52:1c:75:81:31)
+I (888) wifi:Total power save buffer number: 16
+I (888) wifi:Init max length of beacon: 752/752
+I (898) wifi:Init max length of beacon: 752/752
+I (898) mesh: <nvs>read layer:0, err:0x1102
+I (898) mesh: <nvs>read assoc:0, err:0x1102
+I (908) mesh: [IO]disable self-organizing<reconnect>
+I (908) wifi:Set ps type: 0
+
+I (918) mesh: [CONFIG]invalid router settings, ssid_len:0, ssid:, bssid:00:00:00:00:00:00
+I (1678) mesh: [MANUAL]designated as root and router is not set
+[0;32mI (1688) [mwifi, 224]: MESH is started[0m
+[0;32mI (1688) [get_started, 186]: event_loop_cb, event: 0[0m
+[0;32mI (1688) [get_started, 190]: MESH is started[0m
+[0;32mI (1698) [get_started, 32]: Root is running[0m
