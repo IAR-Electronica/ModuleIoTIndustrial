@@ -20,10 +20,10 @@
 #define ADDRESS_POINTER_REG_HI_THRESH_REGISTER  0x02
 #define ADDRESS_POINTER_REG_LO_THRESH_REGISTER  0x03
 /// ERRORES DEFINIDOS PARA INICIALIZAR ADS1115
-#define ERROR_INIT_ADS1115_OK 0x01 // configuraci髇 inicializada correctamente
+#define ERROR_INIT_ADS1115_OK 0x01 // configuraci贸n inicializada correctamente
 #define ERROR_INIT_ADS1115_WRITE_OK 0x02
 #define ERROR_INIT_ADS1115_READ_OK 0x03
-#define ERROR_INIT_ADS1115_WRITE_ERROR 0x04 // error en la comunicaci髇 I2C
+#define ERROR_INIT_ADS1115_WRITE_ERROR 0x04 // error en la comunicaci贸n I2C
 #define ERROR_INIT_ADS1115_READ_ERROR  0x05 // el dispositivo se lee pero no se escribe correctamente
 #define ERROR_INIT_ADS1115_NOT_CONFIG 0x06
 #define ERROR_INIT_ADS1115_FAIL  0xFF // no se puede LEER NI  configurar el dispositivo
@@ -61,8 +61,8 @@ static ads111x_handle_t ADS1115 ;
 
 /**
  *
- * @param i2c_address: 8 bytes para el dispositivo, a馻diendole un 0 delante de la direcci騨
- * @param ads1115Config estructura de configuraci髇 definida por el usuario
+ * @param i2c_address: 8 bytes para el dispositivo, a帽adiendole un 0 delante de la direcci貌n
+ * @param ads1115Config estructura de configuraci贸n definida por el usuario
  * @return ERROR: 0X01 -> OK
  * 				  OXO2 ->WRITE_OK
  * 				  0X03 ->READ_OK
@@ -90,16 +90,16 @@ uint8_t ADS1115init(uint8_t i2c_address, ADS1115_config_t *ads1115Config){
 		return error_code_init ;
 	}
 
-	// CONFIGURACI襈 DEL USUARIO
+	// CONFIGURACI脪N DEL USUARIO
 	selectChannel(ADS1115.user_config.channel_select ) ;
 	setPGA(ADS1115.user_config.setPGA) ;
 	setMode(ADS1115.user_config.mode_measurement);
 	setSPS(ADS1115.user_config.setSPS) ;
 	alertDRYport(ADS1115.user_config.alert_mode) ;
-	memcpy(&config_user[1],(uint8_t *)&ADS1115.config_register ,2) ;//destino, fuente, tama駉
-	// Escritura de la configuraci騨 del usuario
+	memcpy(&config_user[1],(uint8_t *)&ADS1115.config_register ,2) ;//destino, fuente, tama帽o
+	// Escritura de la configuraci貌n del usuario
 
-	error_code_init = I2CWriteToSlave(ADS1115.I2C_address,config_user,3) ; //escribir registro de configuraci髇
+	error_code_init = I2CWriteToSlave(ADS1115.I2C_address,config_user,3) ; //escribir registro de configuraci贸n
 	errorI2CWrite(&error_code_init) ;
 
 	if (error_code_init != ERROR_INIT_ADS1115_WRITE_OK) {
@@ -110,7 +110,7 @@ uint8_t ADS1115init(uint8_t i2c_address, ADS1115_config_t *ads1115Config){
 	if (error_code_init != ERROR_INIT_ADS1115_READ_OK) {
 			return error_code_init ;
 	}
-	// check de configuraci髇 de los parametros
+	// check de configuraci贸n de los parametros
 
 	error_code_init = I2CReadToSlave(ADS1115.I2C_address, read_config_check ,2 ) 	   ;
 	if (error_code_init != ERROR_INIT_ADS1115_READ_OK) {
@@ -169,7 +169,7 @@ void selectChannel(ADS1115_channel_t channel)
 	//ADS1115.config_register.OS = 0 ;
 	ADS1115.config_register.MUX = channel ;
 	config_user[0] = ADDRESS_POINTER_REG_CONFIG_REGISTER ;
-	memcpy(&config_user[1],(uint8_t *)&ADS1115.config_register ,2) ;//destino, fuente, tama駉
+	memcpy(&config_user[1],(uint8_t *)&ADS1115.config_register ,2) ;//destino, fuente, tama帽o
 	I2CWriteToSlave(ADS1115.I2C_address,config_user,3) ;
 	//printf("write_to_slave: %02x %02x %02x\r\n",config_user[0],config_user[1],config_user[2]) ;
 	I2CReadToSlave(ADS1115.I2C_address, read_config_check ,2 );
@@ -214,7 +214,7 @@ static void alertDRYport(ADS1115_alert_comparator_t alert_user){
 
 /// falta controlar los errores en caso que existan en los puertos
 /// I2C.
-/// La funci髇 lee el valor del adc y lo transforma en un valor de tension en
+/// La funci贸n lee el valor del adc y lo transforma en un valor de tension en
 /// volts
 float getVoltage(){
 		uint8_t address_pointer  ;
@@ -228,7 +228,7 @@ float getVoltage(){
 			address_pointer = ADDRESS_POINTER_REG_CONFIG_REGISTER ;
 			ADS1115.config_register.OS = 1 ;
 			raw_data[0] = address_pointer  ;
-			memcpy(&raw_data[1],(uint8_t *)&ADS1115.config_register ,sizeof(ADS1115.config_register)) ;//destino, fuente, tama駉
+			memcpy(&raw_data[1],(uint8_t *)&ADS1115.config_register ,sizeof(ADS1115.config_register)) ;//destino, fuente, tama帽o
 			//printf("write_to_slave_get_float: %02x %02x %02x  \r\n", raw_data[0],raw_data[1],raw_data[2]) ;
 			I2CWriteToSlave(ADS1115.I2C_address ,raw_data , 3) ;
 			ADS1115.config_register.OS = 0 ;
@@ -273,8 +273,5 @@ void errorI2CRead(uint8_t *error_code){
 		*error_code = ERROR_INIT_ADS1115_FAIL  	    ;
 	}
 }
-
-
-
 
 

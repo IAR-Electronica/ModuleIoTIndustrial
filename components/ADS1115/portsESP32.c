@@ -141,6 +141,3 @@ uint8_t I2CReadToSlave(uint8_t I2C_address, uint8_t *buffer_data,size_t length_b
 }
 
 
-
-
-
