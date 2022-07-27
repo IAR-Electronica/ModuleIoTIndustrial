@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#define ROUTER_SSID "" 
-#define ROUTER_PASSWORD "" 
+#define ROUTER_SSID "Fibertel WiFi157 2.4GHz" 
+#define ROUTER_PASSWORD "0141234567" 
 
 #include "archivo.c"
 #include "mwifi.h"
@@ -151,8 +151,8 @@ static void print_system_info_timercb(void *timer)
 
 static mdf_err_t wifi_init()
 {
-    mdf_err_t ret          = nvs_flash_init();
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
+    mdf_err_t ret          = nvs_flash_init();
 
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         MDF_ERROR_ASSERT(nvs_flash_erase());
@@ -163,6 +163,8 @@ static mdf_err_t wifi_init()
 
     MDF_ERROR_ASSERT(esp_netif_init());
     MDF_ERROR_ASSERT(esp_event_loop_create_default());
+//    MDF_ERROR_ASSERT(esp_event_loop_init(NULL,NULL));
+    
     MDF_ERROR_ASSERT(esp_wifi_init(&cfg));
     MDF_ERROR_ASSERT(esp_wifi_set_storage(WIFI_STORAGE_FLASH));
     MDF_ERROR_ASSERT(esp_wifi_set_mode(WIFI_MODE_STA));
@@ -213,7 +215,12 @@ void app_main()
         .router_password  = ROUTER_PASSWORD , 
         .channel   = CONFIG_MESH_CHANNEL,
         .mesh_id   = CONFIG_MESH_ID,
-        .mesh_type = CONFIG_DEVICE_TYPE,
+        /*
+            !FIXED USING THIS VALUES: MESH_ROOT,MESH_IDLE ,MESH_NODE. IF USE "CONFIG_DEVICE_TYPE "
+            CONFIGURE DEVICE WITH "make menuconfig" or idf.py menuconfig ! 
+        */
+
+        .mesh_type = MESH_ROOT, 
     };
 
     /**
@@ -225,12 +232,11 @@ void app_main()
     /**
      * @brief Initialize wifi mesh.
      */
-    MDF_ERROR_ASSERT(mdf_event_loop_init(event_loop_cb));
     MDF_ERROR_ASSERT(wifi_init());
     MDF_ERROR_ASSERT(mwifi_init(&cfg));
     MDF_ERROR_ASSERT(mwifi_set_config(&config));
+    MDF_ERROR_ASSERT(mdf_event_loop_init(event_loop_cb));
     MDF_ERROR_ASSERT(mwifi_start());
-    
     /**
      * @brief Data transfer between wifi mesh devices
      */
@@ -243,9 +249,10 @@ void app_main()
         xTaskCreate(node_read_task, "node_read_task", 4 * 1024,
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
     }
-     //  xTaskCreate(vTaskGetADC, "taskADC", 3 * 1024,
-     //               NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY-1, NULL);
-    //TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
-     //                                  true, NULL, print_system_info_timercb);
-    //xTimerStart(timer, 0);
+    //  xTaskCreate(vTaskGetADC, "taskADC", 3 * 1024,
+    //               NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY-1, NULL);
+    //*< timer for print information ! 
+    TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
+                                       true, NULL, print_system_info_timercb);
+    xTimerStart(timer, 0);
 }
