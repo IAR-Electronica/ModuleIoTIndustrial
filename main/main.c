@@ -169,7 +169,7 @@ static mdf_err_t wifi_init()
     MDF_ERROR_ASSERT(esp_wifi_set_storage(WIFI_STORAGE_FLASH));
     MDF_ERROR_ASSERT(esp_wifi_set_mode(WIFI_MODE_STA));
     MDF_ERROR_ASSERT(esp_wifi_set_ps(WIFI_PS_NONE));
-    MDF_ERROR_ASSERT(esp_mesh_set_6m_rate(false));
+    MDF_ERROR_ASSERT(esp_mesh_set_6m_rate(false)); /// tasa de transmisión API-REFERENCE no es clara 
     MDF_ERROR_ASSERT(esp_wifi_start());
 
     return MDF_OK;
@@ -207,9 +207,21 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
     return MDF_OK;
 }
 
+
+void vPrintMeshInfo(void *pv){
+    TickType_t ticks_delay = 4000/portTICK_RATE_MS ; 
+    while(1){
+        printf(" ------------------------------configuration of mesh wifi------------\r\n") ; 
+        mwifi_print_config() ; 
+        printf(" ------------------------------end of mesh wifi------------\r\n") ; 
+        vTaskDelay(ticks_delay) ; 
+    }
+}
+
 void app_main()
 {
-    mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT();
+    mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT(); ///! configure using idf.py menuconfig
+//    mwifi_init_config_t cfg = { -.. } custom configurations 
     mwifi_config_t config   = {
         .router_ssid = ROUTER_SSID, 
         .router_password  = ROUTER_PASSWORD , 
@@ -219,15 +231,14 @@ void app_main()
             !FIXED USING THIS VALUES: MESH_ROOT,MESH_IDLE ,MESH_NODE. IF USE "CONFIG_DEVICE_TYPE "
             CONFIGURE DEVICE WITH "make menuconfig" or idf.py menuconfig ! 
         */
-
         .mesh_type = MESH_ROOT, 
     };
 
     /**
      * @brief Set the log level for serial port printing.
      */
-    esp_log_level_set("*", ESP_LOG_INFO);
-    esp_log_level_set(TAG, ESP_LOG_DEBUG);
+    // esp_log_level_set("*", ESP_LOG_INFO);
+    // esp_log_level_set(TAG, ESP_LOG_DEBUG);
 
     /**
      * @brief Initialize wifi mesh.
@@ -249,10 +260,13 @@ void app_main()
         xTaskCreate(node_read_task, "node_read_task", 4 * 1024,
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
     }
+
+    xTaskCreate(vPrintMeshInfo,"printMeshInfo", 5*1024,NULL,
+                CONFIG_MDF_TASK_DEFAULT_PRIOTY+1UL, NULL ) ; 
     //  xTaskCreate(vTaskGetADC, "taskADC", 3 * 1024,
     //               NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY-1, NULL);
     //*< timer for print information ! 
-    TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
-                                       true, NULL, print_system_info_timercb);
-    xTimerStart(timer, 0);
+    //TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
+    //                                     true, NULL, print_system_info_timercb);
+    //xTimerStart(timer, 0);
 }

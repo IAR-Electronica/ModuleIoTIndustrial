@@ -1,0 +1,2090 @@
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6612
+load:0x40078000,len:14788
+load:0x40080400,len:3792
+entry 0x40080694
+[0;32mI (27) boot: ESP-IDF v4.4.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 16:37:24[0m
+[0;32mI (27) boot: chip revision: 1[0m
+[0;32mI (30) boot_comm: chip revision: 1, min. bootloader chip revision: 0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (46) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (56) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (67) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (82) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (89) boot: End of partition table[0m
+[0;32mI (94) boot_comm: chip revision: 1, min. application chip revision: 0[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=20f00h (134912) map[0m
+[0;32mI (158) esp_image: segment 1: paddr=00030f28 vaddr=3ffb0000 size=038fch ( 14588) load[0m
+[0;32mI (164) esp_image: segment 2: paddr=0003482c vaddr=40080000 size=0b7ech ( 47084) load[0m
+[0;32mI (184) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=9f238h (651832) map[0m
+[0;32mI (420) esp_image: segment 4: paddr=000df260 vaddr=4008b7ec size=0916ch ( 37228) load[0m
+[0;32mI (435) esp_image: segment 5: paddr=000e83d4 vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (446) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (446) boot: Disabling RNG early entropy source...[0m
+[0;32mI (458) cpu_start: Pro cpu up.[0m
+[0;32mI (458) cpu_start: Starting app cpu, entry point is 0x400811f8[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (474) cpu_start: Pro cpu start user code[0m
+[0;32mI (474) cpu_start: cpu freq: 160000000[0m
+[0;32mI (474) cpu_start: Application information:[0m
+[0;32mI (479) cpu_start: Project name:     new_prh[0m
+[0;32mI (484) cpu_start: App version:      5f7bcbd-dirty[0m
+[0;32mI (489) cpu_start: Compile time:     Jul 27 2022 11:56:52[0m
+[0;32mI (495) cpu_start: ELF file SHA256:  376a8229d3ff5552...[0m
+[0;32mI (501) cpu_start: ESP-IDF:          v4.4.1-dirty[0m
+[0;32mI (507) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (514) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (520) heap_init: At 3FFB8790 len 00027870 (158 KiB): DRAM[0m
+[0;32mI (526) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (533) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (539) heap_init: At 40094958 len 0000B6A8 (45 KiB): IRAM[0m
+[0;32mI (546) spi_flash: detected chip: generic[0m
+[0;32mI (550) spi_flash: flash io: dio[0m
+[0;32mI (555) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+I (670) wifi:wifi driver task: 3ffc1aa4, prio:23, stack:6656, core=0
+[0;32mI (670) system_api: Base MAC address is not set[0m
+[0;32mI (670) system_api: read default base MAC address from EFUSE[0m
+I (700) wifi:wifi firmware version: 63017e0
+I (700) wifi:wifi certification version: v7.0
+I (700) wifi:config NVS flash: enabled
+I (700) wifi:config nano formating: disabled
+I (700) wifi:Init data frame dynamic rx buffer num: 32
+I (710) wifi:Init management frame dynamic rx buffer num: 32
+I (710) wifi:Init management short buffer num: 32
+I (720) wifi:Init dynamic tx buffer num: 32
+I (720) wifi:Init static rx buffer size: 1600
+I (730) wifi:Init static rx buffer num: 10
+I (730) wifi:Init dynamic rx buffer num: 32
+[0;32mI (730) wifi_init: rx ba win: 6[0m
+[0;32mI (740) wifi_init: tcpip mbox: 32[0m
+[0;32mI (740) wifi_init: udp mbox: 6[0m
+[0;32mI (750) wifi_init: tcp mbox: 6[0m
+[0;32mI (750) wifi_init: tcp tx win: 5744[0m
+[0;32mI (750) wifi_init: tcp rx win: 5744[0m
+[0;32mI (760) wifi_init: tcp mss: 1440[0m
+[0;32mI (760) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (770) wifi_init: WiFi RX IRAM OP enabled[0m
+I (780) wifi:Set ps type: 0
+
+[0;32mI (780) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+
+Brownout detector was triggered
+
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6612
+load:0x40078000,len:14788
+load:0x40080400,len:3792
+entry 0x40080694
+[0;32mI (27) boot: ESP-IDF v4.4.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 16:37:24[0m
+[0;32mI (27) boot: chip revision: 1[0m
+[0;32mI (30) boot_comm: chip revision: 1, min. bootloader chip revision: 0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (67) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (82) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (94) boot_comm: chip revision: 1, min. application chip revision: 0[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=20f00h (134912) map[0m
+[0;32mI (159) esp_image: segment 1: paddr=00030f28 vaddr=3ffb0000 size=038fch ( 14588) load[0m
+[0;32mI (165) esp_image: segment 2: paddr=0003482c vaddr=40080000 size=0b7ech ( 47084) load[0m
+[0;32mI (184) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=9f238h (651832) map[0m
+[0;32mI (420) esp_image: segment 4: paddr=000df260 vaddr=4008b7ec size=0916ch ( 37228) load[0m
+[0;32mI (436) esp_image: segment 5: paddr=000e83d4 vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (446) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (446) boot: Disabling RNG early entropy source...[0m
+[0;32mI (458) cpu_start: Pro cpu up.[0m
+[0;32mI (458) cpu_start: Starting app cpu, entry point is 0x400811f8[0m
+[0;32mI (445) cpu_start: App cpu up.[0m
+[0;32mI (475) cpu_start: Pro cpu start user code[0m
+[0;32mI (475) cpu_start: cpu freq: 160000000[0m
+[0;32mI (475) cpu_start: Application information:[0m
+[0;32mI (479) cpu_start: Project name:     new_prh[0m
+[0;32mI (484) cpu_start: App version:      5f7bcbd-dirty[0m
+[0;32mI (490) cpu_start: Compile time:     Jul 27 2022 11:56:52[0m
+[0;32mI (496) cpu_start: ELF file SHA256:  376a8229d3ff5552...[0m
+[0;32mI (502) cpu_start: ESP-IDF:          v4.4.1-dirty[0m
+[0;32mI (508) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (515) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (521) heap_init: At 3FFB8790 len 00027870 (158 KiB): DRAM[0m
+[0;32mI (527) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (533) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (540) heap_init: At 40094958 len 0000B6A8 (45 KiB): IRAM[0m
+[0;32mI (547) spi_flash: detected chip: generic[0m
+[0;32mI (551) spi_flash: flash io: dio[0m
+[0;32mI (556) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+I (671) wifi:wifi driver task: 3ffc1aa4, prio:23, stack:6656, core=0
+[0;32mI (671) system_api: Base MAC address is not set[0m
+[0;32mI (671) system_api: read default base MAC address from EFUSE[0m
+I (701) wifi:wifi firmware version: 63017e0
+I (701) wifi:wifi certification version: v7.0
+I (701) wifi:config NVS flash: enabled
+I (701) wifi:config nano formating: disabled
+I (701) wifi:Init data frame dynamic rx buffer num: 32
+I (711) wifi:Init management frame dynamic rx buffer num: 32
+I (711) wifi:Init management short buffer num: 32
+I (721) wifi:Init dynamic tx buffer num: 32
+I (721) wifi:Init static rx buffer size: 1600
+I (731) wifi:Init static rx buffer num: 10
+I (731) wifi:Init dynamic rx buffer num: 32
+[0;32mI (731) wifi_init: rx ba win: 6[0m
+[0;32mI (741) wifi_init: tcpip mbox: 32[0m
+[0;32mI (741) wifi_init: udp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp tx win: 5744[0m
+[0;32mI (751) wifi_init: tcp rx win: 5744[0m
+[0;32mI (761) wifi_init: tcp mss: 1440[0m
+[0;32mI (761) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (771) wifi_init: WiFi RX IRAM OP enabled[0m
+I (771) wifi:Set ps type: 0
+
+[0;32mI (771) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+
+Brownout detector was triggered
+
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6612
+load:0x40078000,len:14788
+load:0x40080400,len:3792
+entry 0x40080694
+[0;32mI (27) boot: ESP-IDF v4.4.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 16:37:24[0m
+[0;32mI (27) boot: chip revision: 1[0m
+[0;32mI (30) boot_comm: chip revision: 1, min. bootloader chip revision: 0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (67) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (82) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (94) boot_comm: chip revision: 1, min. application chip revision: 0[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=20f00h (134912) map[0m
+[0;32mI (159) esp_image: segment 1: paddr=00030f28 vaddr=3ffb0000 size=038fch ( 14588) load[0m
+[0;32mI (165) esp_image: segment 2: paddr=0003482c vaddr=40080000 size=0b7ech ( 47084) load[0m
+[0;32mI (184) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=9f238h (651832) map[0m
+[0;32mI (420) esp_image: segment 4: paddr=000df260 vaddr=4008b7ec size=0916ch ( 37228) load[0m
+[0;32mI (436) esp_image: segment 5: paddr=000e83d4 vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (446) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (446) boot: Disabling RNG early entropy source...[0m
+[0;32mI (458) cpu_start: Pro cpu up.[0m
+[0;32mI (458) cpu_start: Starting app cpu, entry point is 0x400811f8[0m
+[0;32mI (445) cpu_start: App cpu up.[0m
+[0;32mI (475) cpu_start: Pro cpu start user code[0m
+[0;32mI (475) cpu_start: cpu freq: 160000000[0m
+[0;32mI (475) cpu_start: Application information:[0m
+[0;32mI (479) cpu_start: Project name:     new_prh[0m
+[0;32mI (484) cpu_start: App version:      5f7bcbd-dirty[0m
+[0;32mI (490) cpu_start: Compile time:     Jul 27 2022 11:56:52[0m
+[0;32mI (496) cpu_start: ELF file SHA256:  376a8229d3ff5552...[0m
+[0;32mI (502) cpu_start: ESP-IDF:          v4.4.1-dirty[0m
+[0;32mI (508) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (515) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (521) heap_init: At 3FFB8790 len 00027870 (158 KiB): DRAM[0m
+[0;32mI (527) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (533) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (540) heap_init: At 40094958 len 0000B6A8 (45 KiB): IRAM[0m
+[0;32mI (547) spi_flash: detected chip: generic[0m
+[0;32mI (551) spi_flash: flash io: dio[0m
+[0;32mI (556) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+I (671) wifi:wifi driver task: 3ffc1aa4, prio:23, stack:6656, core=0
+[0;32mI (671) system_api: Base MAC address is not set[0m
+[0;32mI (671) system_api: read default base MAC address from EFUSE[0m
+I (701) wifi:wifi firmware version: 63017e0
+I (701) wifi:wifi certification version: v7.0
+I (701) wifi:config NVS flash: enabled
+I (701) wifi:config nano formating: disabled
+I (701) wifi:Init data frame dynamic rx buffer num: 32
+I (711) wifi:Init management frame dynamic rx buffer num: 32
+I (711) wifi:Init management short buffer num: 32
+I (721) wifi:Init dynamic tx buffer num: 32
+I (721) wifi:Init static rx buffer size: 1600
+I (731) wifi:Init static rx buffer num: 10
+I (731) wifi:Init dynamic rx buffer num: 32
+[0;32mI (731) wifi_init: rx ba win: 6[0m
+[0;32mI (741) wifi_init: tcpip mbox: 32[0m
+[0;32mI (741) wifi_init: udp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp tx win: 5744[0m
+[0;32mI (751) wifi_init: tcp rx win: 5744[0m
+[0;32mI (761) wifi_init: tcp mss: 1440[0m
+[0;32mI (761) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (771) wifi_init: WiFi RX IRAM OP enabled[0m
+I (771) wifi:Set ps type: 0
+
+[0;32mI (771) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+
+Brownout detector was triggered
+
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6612
+load:0x40078000,len:14788
+load:0x40080400,len:3792
+entry 0x40080694
+[0;32mI (27) boot: ESP-IDF v4.4.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 16:37:24[0m
+[0;32mI (27) boot: chip revision: 1[0m
+[0;32mI (30) boot_comm: chip revision: 1, min. bootloader chip revision: 0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (67) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (82) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (94) boot_comm: chip revision: 1, min. application chip revision: 0[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=20f00h (134912) map[0m
+[0;32mI (159) esp_image: segment 1: paddr=00030f28 vaddr=3ffb0000 size=038fch ( 14588) load[0m
+[0;32mI (165) esp_image: segment 2: paddr=0003482c vaddr=40080000 size=0b7ech ( 47084) load[0m
+[0;32mI (184) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=9f238h (651832) map[0m
+[0;32mI (420) esp_image: segment 4: paddr=000df260 vaddr=4008b7ec size=0916ch ( 37228) load[0m
+[0;32mI (436) esp_image: segment 5: paddr=000e83d4 vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (446) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (446) boot: Disabling RNG early entropy source...[0m
+[0;32mI (458) cpu_start: Pro cpu up.[0m
+[0;32mI (458) cpu_start: Starting app cpu, entry point is 0x400811f8[0m
+[0;32mI (445) cpu_start: App cpu up.[0m
+[0;32mI (475) cpu_start: Pro cpu start user code[0m
+[0;32mI (475) cpu_start: cpu freq: 160000000[0m
+[0;32mI (475) cpu_start: Application information:[0m
+[0;32mI (479) cpu_start: Project name:     new_prh[0m
+[0;32mI (484) cpu_start: App version:      5f7bcbd-dirty[0m
+[0;32mI (490) cpu_start: Compile time:     Jul 27 2022 11:56:52[0m
+[0;32mI (496) cpu_start: ELF file SHA256:  376a8229d3ff5552...[0m
+[0;32mI (502) cpu_start: ESP-IDF:          v4.4.1-dirty[0m
+[0;32mI (508) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (515) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (521) heap_init: At 3FFB8790 len 00027870 (158 KiB): DRAM[0m
+[0;32mI (527) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (533) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (540) heap_init: At 40094958 len 0000B6A8 (45 KiB): IRAM[0m
+[0;32mI (547) spi_flash: detected chip: generic[0m
+[0;32mI (551) spi_flash: flash io: dio[0m
+[0;32mI (556) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+I (671) wifi:wifi driver task: 3ffc1aa4, prio:23, stack:6656, core=0
+[0;32mI (671) system_api: Base MAC address is not set[0m
+[0;32mI (671) system_api: read default base MAC address from EFUSE[0m
+I (701) wifi:wifi firmware version: 63017e0
+I (701) wifi:wifi certification version: v7.0
+I (701) wifi:config NVS flash: enabled
+I (701) wifi:config nano formating: disabled
+I (701) wifi:Init data frame dynamic rx buffer num: 32
+I (711) wifi:Init management frame dynamic rx buffer num: 32
+I (711) wifi:Init management short buffer num: 32
+I (721) wifi:Init dynamic tx buffer num: 32
+I (721) wifi:Init static rx buffer size: 1600
+I (731) wifi:Init static rx buffer num: 10
+I (731) wifi:Init dynamic rx buffer num: 32
+[0;32mI (731) wifi_init: rx ba win: 6[0m
+[0;32mI (741) wifi_init: tcpip mbox: 32[0m
+[0;32mI (741) wifi_init: udp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp tx win: 5744[0m
+[0;32mI (751) wifi_init: tcp rx win: 5744[0m
+[0;32mI (761) wifi_init: tcp mss: 1440[0m
+[0;32mI (761) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (771) wifi_init: WiFi RX IRAM OP enabled[0m
+I (771) wifi:Set ps type: 0
+
+[0;32mI (771) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+
+Brownout detector was triggered
+
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6612
+load:0x40078000,len:14788
+load:0x40080400,len:3792
+entry 0x40080694
+[0;32mI (27) boot: ESP-IDF v4.4.1-dirty 2nd stage bootloader[0m
+[0;32mI (27) boot: compile time 16:37:24[0m
+[0;32mI (27) boot: chip revision: 1[0m
+[0;32mI (30) boot_comm: chip revision: 1, min. bootloader chip revision: 0[0m
+[0;32mI (37) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (42) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (47) boot.esp32: SPI Flash Size : 4MB[0m
+[0;32mI (51) boot: Enabling RNG early entropy source...[0m
+[0;32mI (57) boot: Partition Table:[0m
+[0;32mI (60) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (67) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (75) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (82) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (90) boot: End of partition table[0m
+[0;32mI (94) boot_comm: chip revision: 1, min. application chip revision: 0[0m
+[0;32mI (101) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=20f00h (134912) map[0m
+[0;32mI (159) esp_image: segment 1: paddr=00030f28 vaddr=3ffb0000 size=038fch ( 14588) load[0m
+[0;32mI (165) esp_image: segment 2: paddr=0003482c vaddr=40080000 size=0b7ech ( 47084) load[0m
+[0;32mI (184) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=9f238h (651832) map[0m
+[0;32mI (420) esp_image: segment 4: paddr=000df260 vaddr=4008b7ec size=0916ch ( 37228) load[0m
+[0;32mI (436) esp_image: segment 5: paddr=000e83d4 vaddr=50000000 size=00010h (    16) load[0m
+[0;32mI (446) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (446) boot: Disabling RNG early entropy source...[0m
+[0;32mI (458) cpu_start: Pro cpu up.[0m
+[0;32mI (458) cpu_start: Starting app cpu, entry point is 0x400811f8[0m
+[0;32mI (445) cpu_start: App cpu up.[0m
+[0;32mI (475) cpu_start: Pro cpu start user code[0m
+[0;32mI (475) cpu_start: cpu freq: 160000000[0m
+[0;32mI (475) cpu_start: Application information:[0m
+[0;32mI (479) cpu_start: Project name:     new_prh[0m
+[0;32mI (484) cpu_start: App version:      5f7bcbd-dirty[0m
+[0;32mI (490) cpu_start: Compile time:     Jul 27 2022 11:56:52[0m
+[0;32mI (496) cpu_start: ELF file SHA256:  376a8229d3ff5552...[0m
+[0;32mI (502) cpu_start: ESP-IDF:          v4.4.1-dirty[0m
+[0;32mI (508) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (515) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (521) heap_init: At 3FFB8790 len 00027870 (158 KiB): DRAM[0m
+[0;32mI (527) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (533) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (540) heap_init: At 40094958 len 0000B6A8 (45 KiB): IRAM[0m
+[0;32mI (547) spi_flash: detected chip: generic[0m
+[0;32mI (551) spi_flash: flash io: dio[0m
+[0;32mI (556) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+I (671) wifi:wifi driver task: 3ffc1aa4, prio:23, stack:6656, core=0
+[0;32mI (671) system_api: Base MAC address is not set[0m
+[0;32mI (671) system_api: read default base MAC address from EFUSE[0m
+I (701) wifi:wifi firmware version: 63017e0
+I (701) wifi:wifi certification version: v7.0
+I (701) wifi:config NVS flash: enabled
+I (701) wifi:config nano formating: disabled
+I (701) wifi:Init data frame dynamic rx buffer num: 32
+I (711) wifi:Init management frame dynamic rx buffer num: 32
+I (711) wifi:Init management short buffer num: 32
+I (721) wifi:Init dynamic tx buffer num: 32
+I (721) wifi:Init static rx buffer size: 1600
+I (731) wifi:Init static rx buffer num: 10
+I (731) wifi:Init dynamic rx buffer num: 32
+[0;32mI (731) wifi_init: rx ba win: 6[0m
+[0;32mI (741) wifi_init: tcpip mbox: 32[0m
+[0;32mI (741) wifi_init: udp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp mbox: 6[0m
+[0;32mI (751) wifi_init: tcp tx win: 5744[0m
+[0;32mI (751) wifi_init: tcp rx win: 5744[0m
+[0;32mI (761) wifi_init: tcp mss: 1440[0m
+[0;32mI (761) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (771) wifi_init: WiFi RX IRAM OP enabled[0m
+I (771) wifi:Set ps type: 0
+
+[0;32mI (771) phy_init: phy_version 4670,719f9f6,Feb 18 2021,17:07:07[0m
+I (881) wifi:mode : sta (10:52:1c:75:81:30)
+I (881) wifi:enable tsf
+[0;32mI (881) [mwifi, 298]: esp-mdf version: v1.0-156-gcf50274[0m
+I (901) wifi:mode : sta (10:52:1c:75:81:30) + softAP (10:52:1c:75:81:31)
+I (901) wifi:Total power save buffer number: 16
+I (901) wifi:Init max length of beacon: 752/752
+I (901) wifi:Init max length of beacon: 752/752
+I (911) mesh: <nvs>read layer:0, err:0x1102
+I (911) mesh: <nvs>read assoc:0, err:0x1102
+I (911) mesh: [IO]disable self-organizing<reconnect>
+I (921) wifi:Set ps type: 0
+
+I (1681) mesh: [CONFIG]connect to router:Fibertel WiFi157 2.4GHz, 00:00:00:00:00:00
+[0;32mI (1681) [mwifi, 224]: MESH is started[0m
+[0;32mI (1691) [get_started, 188]: event_loop_cb, event: 0[0m
+[0;32mI (1691) [get_started, 192]: MESH is started[0m
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (1691) [get_started, 32]: Root is running[0m
+[0;32mI (1701) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (1711) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (1721) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (1721) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (1731) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (1731) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (1741) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (1741) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (1751) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (1751) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (1761) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (1771) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (1771) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (1781) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (1781) [mwifi, 352]: topology              : 0[0m
+[0;32mI (1791) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (1791) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (1801) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (1811) [mwifi, 358]: passive_scan_ms       : 300[0m
+[0;32mI (1811) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (1821) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (1821) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (1831) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (1831) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (1841) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (1841) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (1851) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (1861) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (1861) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (1871) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (1881) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (1881) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (1891) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (1901) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (1901) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (1911) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (1911) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (1921) [mwifi, 379]: channel               : 13[0m
+[0;32mI (1921) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (1931) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+I (4141) wifi:ap channel adjust o:13,2 n:6,2
+I (4141) wifi:new:<6,0>, old:<13,2>, ap:<6,2>, sta:<6,0>, prof:13
+I (4141) wifi:state: init -> auth (b0)
+I (4151) wifi:state: auth -> assoc (0)
+I (4151) wifi:state: assoc -> run (10)
+W (4171) wifi:<ba-add>idx:0 (ifx:0, f8:08:4f:3f:30:64), tid:0, ssn:0, winSize:64
+W (4171) wifi:<ba-add>idx:1 (ifx:0, f8:08:4f:3f:30:64), tid:5, ssn:0, winSize:64
+I (4191) wifi:connected with Fibertel WiFi157 2.4GHz, aid = 3, channel 6, BW20, bssid = f8:08:4f:3f:30:64
+I (4191) wifi:security: WPA2-PSK, phy: bgn, rssi: -72
+I (4201) wifi:pm start, type: 0
+
+I (4201) mesh: [scan]new scanning time:600ms, beacon interval:300ms
+I (4221) wifi:AP's beacon interval = 102400 us, DTIM period = 1
+I (4221) mesh: <flush>upstream packets, connections(max):6, waiting:0, upQ:0
+[0;32mI (4221) [mwifi, 175]: Parent is connected[0m
+I (4221) mesh: <flush>root
+[0;32mI (4221) [mwifi, 258]: State represents: 0[0m
+[0;32mI (4221) [get_started, 188]: event_loop_cb, event: 7[0m
+I (4231) mesh: [TXQ]<max:32>up(0, be:0), down(0, be:0), mgmt:0, xon(req:0, rsp:0), bcast:0, wnd(0, parent:00:00:00:00:00:00)
+[0;32mI (4241) [get_started, 196]: Parent is connected on station interface[0m
+I (4251) mesh: [RXQ]<max:32 = cfg:32 + extra:0>self:0, <max:32 = cfg:32 + extra:0>tods:0
+[0;32mI (4251) [get_started, 188]: event_loop_cb, event: 11[0m
+[0;32mI (4271) [get_started, 188]: event_loop_cb, event: 14[0m
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (5941) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (5941) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (5941) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (5951) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (5951) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (5961) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (5961) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (5971) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (5981) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (5981) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (5991) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (5991) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (6001) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (6001) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (6011) [mwifi, 352]: topology              : 0[0m
+[0;32mI (6011) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (6021) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (6031) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (6031) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (6041) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (6041) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (6051) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (6061) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (6061) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (6071) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (6071) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (6081) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (6081) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (6091) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (6101) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (6101) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (6111) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (6121) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (6121) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (6131) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (6131) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (6141) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (6141) [mwifi, 379]: channel               : 13[0m
+[0;32mI (6151) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (6161) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (10171) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (10171) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (10171) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (10181) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (10181) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (10191) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (10201) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (10201) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (10211) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (10211) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (10221) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (10221) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (10231) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (10241) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (10241) [mwifi, 352]: topology              : 0[0m
+[0;32mI (10251) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (10251) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (10261) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (10261) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (10271) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (10281) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (10281) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (10291) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (10291) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (10301) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (10301) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (10311) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (10321) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (10321) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (10331) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (10331) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (10341) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (10351) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (10361) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (10361) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (10371) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (10371) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (10381) [mwifi, 379]: channel               : 13[0m
+[0;32mI (10381) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (10391) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (14401) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (14401) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (14401) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (14411) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (14411) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (14421) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (14431) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (14431) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (14441) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (14441) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (14451) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (14451) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (14461) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (14471) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (14471) [mwifi, 352]: topology              : 0[0m
+[0;32mI (14481) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (14481) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (14491) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (14491) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (14501) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (14511) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (14511) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (14521) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (14521) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (14531) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (14531) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (14541) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (14551) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (14551) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (14561) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (14561) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (14571) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (14581) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (14591) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (14591) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (14601) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (14601) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (14611) [mwifi, 379]: channel               : 13[0m
+[0;32mI (14611) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (14621) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (18631) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (18631) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (18631) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (18641) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (18641) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (18651) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (18661) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (18661) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (18671) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (18671) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (18681) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (18681) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (18691) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (18701) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (18701) [mwifi, 352]: topology              : 0[0m
+[0;32mI (18711) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (18711) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (18721) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (18721) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (18731) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (18741) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (18741) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (18751) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (18751) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (18761) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (18761) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (18771) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (18781) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (18781) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (18791) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (18791) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (18801) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (18811) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (18821) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (18821) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (18831) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (18831) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (18841) [mwifi, 379]: channel               : 13[0m
+[0;32mI (18841) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (18851) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (22861) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (22861) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (22861) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (22871) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (22871) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (22881) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (22891) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (22891) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (22901) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (22901) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (22911) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (22911) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (22921) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (22931) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (22931) [mwifi, 352]: topology              : 0[0m
+[0;32mI (22941) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (22941) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (22951) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (22951) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (22961) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (22971) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (22971) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (22981) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (22981) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (22991) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (22991) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (23001) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (23011) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (23011) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (23021) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (23021) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (23031) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (23041) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (23051) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (23051) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (23061) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (23061) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (23071) [mwifi, 379]: channel               : 13[0m
+[0;32mI (23071) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (23081) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (27091) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (27091) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (27091) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (27101) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (27101) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (27111) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (27121) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (27121) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (27131) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (27131) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (27141) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (27141) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (27151) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (27161) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (27161) [mwifi, 352]: topology              : 0[0m
+[0;32mI (27171) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (27171) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (27181) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (27181) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (27191) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (27201) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (27201) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (27211) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (27211) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (27221) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (27221) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (27231) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (27241) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (27241) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (27251) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (27251) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (27261) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (27271) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (27281) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (27281) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (27291) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (27291) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (27301) [mwifi, 379]: channel               : 13[0m
+[0;32mI (27301) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (27311) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (31321) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (31321) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (31321) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (31331) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (31331) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (31341) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (31351) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (31351) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (31361) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (31361) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (31371) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (31371) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (31381) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (31391) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (31391) [mwifi, 352]: topology              : 0[0m
+[0;32mI (31401) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (31401) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (31411) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (31411) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (31421) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (31431) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (31431) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (31441) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (31441) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (31451) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (31451) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (31461) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (31471) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (31471) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (31481) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (31481) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (31491) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (31501) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (31511) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (31511) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (31521) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (31521) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (31531) [mwifi, 379]: channel               : 13[0m
+[0;32mI (31531) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (31541) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (35551) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (35551) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (35551) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (35561) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (35561) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (35571) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (35581) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (35581) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (35591) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (35591) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (35601) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (35601) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (35611) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (35621) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (35621) [mwifi, 352]: topology              : 0[0m
+[0;32mI (35631) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (35631) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (35641) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (35641) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (35651) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (35661) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (35661) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (35671) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (35671) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (35681) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (35681) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (35691) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (35701) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (35701) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (35711) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (35711) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (35721) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (35731) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (35741) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (35741) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (35751) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (35751) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (35761) [mwifi, 379]: channel               : 13[0m
+[0;32mI (35761) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (35771) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (39781) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (39781) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (39781) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (39791) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (39801) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (39801) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (39811) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (39811) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (39821) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (39821) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (39831) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (39841) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (39841) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (39851) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (39851) [mwifi, 352]: topology              : 0[0m
+[0;32mI (39861) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (39871) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (39871) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (39881) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (39881) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (39891) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (39891) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (39901) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (39901) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (39911) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (39921) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (39921) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (39931) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (39931) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (39941) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (39951) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (39951) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (39961) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (39971) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (39971) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (39981) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (39981) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (39991) [mwifi, 379]: channel               : 13[0m
+[0;32mI (40001) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (40001) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (44011) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (44011) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (44011) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (44021) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (44021) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (44031) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (44041) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (44041) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (44051) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (44051) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (44061) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (44061) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (44071) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (44081) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (44081) [mwifi, 352]: topology              : 0[0m
+[0;32mI (44091) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (44091) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (44101) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (44101) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (44111) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (44121) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (44121) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (44131) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (44131) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (44141) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (44141) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (44151) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (44161) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (44161) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (44171) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (44171) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (44181) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (44191) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (44201) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (44201) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (44211) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (44211) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (44221) [mwifi, 379]: channel               : 13[0m
+[0;32mI (44221) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (44231) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (48241) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (48241) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (48241) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (48251) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (48251) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (48261) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (48271) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (48271) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (48281) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (48281) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (48291) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (48291) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (48301) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (48311) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (48311) [mwifi, 352]: topology              : 0[0m
+[0;32mI (48321) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (48321) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (48331) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (48331) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (48341) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (48351) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (48351) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (48361) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (48361) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (48371) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (48371) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (48381) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (48391) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (48391) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (48401) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (48401) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (48411) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (48421) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (48431) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (48431) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (48441) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (48441) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (48451) [mwifi, 379]: channel               : 13[0m
+[0;32mI (48451) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (48461) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (52471) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (52471) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (52471) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (52481) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (52481) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (52491) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (52501) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (52501) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (52511) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (52511) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (52521) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (52521) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (52531) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (52541) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (52541) [mwifi, 352]: topology              : 0[0m
+[0;32mI (52551) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (52551) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (52561) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (52561) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (52571) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (52581) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (52581) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (52591) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (52591) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (52601) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (52601) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (52611) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (52621) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (52621) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (52631) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (52631) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (52641) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (52651) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (52661) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (52661) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (52671) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (52671) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (52681) [mwifi, 379]: channel               : 13[0m
+[0;32mI (52681) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (52691) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (56701) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (56701) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (56701) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (56711) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (56711) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (56721) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (56731) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (56731) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (56741) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (56741) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (56751) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (56751) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (56761) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (56771) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (56771) [mwifi, 352]: topology              : 0[0m
+[0;32mI (56781) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (56781) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (56791) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (56791) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (56801) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (56811) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (56811) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (56821) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (56821) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (56831) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (56831) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (56841) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (56851) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (56851) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (56861) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (56861) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (56871) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (56881) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (56891) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (56891) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (56901) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (56901) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (56911) [mwifi, 379]: channel               : 13[0m
+[0;32mI (56911) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (56921) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (60931) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (60931) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (60931) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (60941) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (60941) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (60951) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (60961) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (60961) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (60971) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (60971) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (60981) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (60981) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (60991) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (61001) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (61001) [mwifi, 352]: topology              : 0[0m
+[0;32mI (61011) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (61011) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (61021) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (61021) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (61031) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (61041) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (61041) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (61051) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (61051) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (61061) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (61061) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (61071) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (61081) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (61081) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (61091) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (61091) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (61101) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (61111) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (61121) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (61121) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (61131) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (61131) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (61141) [mwifi, 379]: channel               : 13[0m
+[0;32mI (61141) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (61151) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (65161) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (65161) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (65161) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (65171) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (65171) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (65181) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (65191) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (65191) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (65201) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (65201) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (65211) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (65211) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (65221) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (65231) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (65231) [mwifi, 352]: topology              : 0[0m
+[0;32mI (65241) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (65241) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (65251) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (65251) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (65261) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (65271) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (65271) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (65281) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (65281) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (65291) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (65291) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (65301) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (65311) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (65311) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (65321) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (65331) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (65331) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (65341) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (65351) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (65351) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (65361) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (65361) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (65371) [mwifi, 379]: channel               : 13[0m
+[0;32mI (65371) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (65381) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (69391) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (69391) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (69391) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (69401) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (69401) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (69411) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (69421) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (69421) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (69431) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (69431) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (69441) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (69441) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (69451) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (69461) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (69461) [mwifi, 352]: topology              : 0[0m
+[0;32mI (69471) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (69471) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (69481) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (69481) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (69491) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (69501) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (69501) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (69511) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (69511) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (69521) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (69521) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (69531) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (69541) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (69541) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (69551) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (69551) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (69561) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (69571) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (69581) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (69581) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (69591) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (69591) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (69601) [mwifi, 379]: channel               : 13[0m
+[0;32mI (69601) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (69611) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (73621) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (73621) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (73621) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (73631) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (73631) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (73641) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (73651) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (73651) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (73661) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (73661) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (73671) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (73671) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (73681) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (73691) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (73691) [mwifi, 352]: topology              : 0[0m
+[0;32mI (73701) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (73701) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (73711) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (73711) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (73721) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (73731) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (73731) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (73741) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (73741) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (73751) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (73751) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (73761) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (73771) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (73771) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (73781) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (73781) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (73791) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (73801) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (73811) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (73811) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (73821) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (73821) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (73831) [mwifi, 379]: channel               : 13[0m
+[0;32mI (73831) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (73841) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (77851) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (77851) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (77851) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (77861) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (77861) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (77871) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (77881) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (77881) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (77891) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (77891) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (77901) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (77901) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (77911) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (77921) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (77921) [mwifi, 352]: topology              : 0[0m
+[0;32mI (77931) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (77931) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (77941) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (77941) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (77951) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (77961) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (77961) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (77971) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (77971) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (77981) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (77981) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (77991) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (78001) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (78001) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (78011) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (78011) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (78021) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (78031) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (78041) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (78041) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (78051) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (78051) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (78061) [mwifi, 379]: channel               : 13[0m
+[0;32mI (78061) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (78071) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (82081) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (82081) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (82081) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (82091) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (82091) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (82101) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (82111) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (82111) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (82121) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (82121) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (82131) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (82131) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (82141) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (82151) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (82151) [mwifi, 352]: topology              : 0[0m
+[0;32mI (82161) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (82161) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (82171) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (82171) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (82181) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (82191) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (82191) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (82201) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (82201) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (82211) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (82211) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (82221) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (82231) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (82231) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (82241) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (82241) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (82251) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (82261) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (82271) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (82271) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (82281) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (82281) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (82291) [mwifi, 379]: channel               : 13[0m
+[0;32mI (82291) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (82301) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (86311) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (86311) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (86311) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (86321) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (86321) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (86331) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (86341) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (86341) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (86351) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (86351) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (86361) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (86361) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (86371) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (86381) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (86381) [mwifi, 352]: topology              : 0[0m
+[0;32mI (86391) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (86391) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (86401) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (86401) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (86411) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (86421) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (86421) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (86431) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (86431) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (86441) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (86441) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (86451) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (86461) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (86461) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (86471) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (86471) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (86481) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (86491) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (86501) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (86501) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (86511) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (86511) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (86521) [mwifi, 379]: channel               : 13[0m
+[0;32mI (86521) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (86531) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (90541) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (90541) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (90541) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (90551) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (90551) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (90561) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (90571) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (90571) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (90581) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (90581) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (90591) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (90591) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (90601) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (90611) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (90611) [mwifi, 352]: topology              : 0[0m
+[0;32mI (90621) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (90621) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (90631) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (90631) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (90641) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (90651) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (90651) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (90661) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (90661) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (90671) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (90671) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (90681) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (90691) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (90691) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (90701) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (90701) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (90711) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (90721) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (90731) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (90731) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (90741) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (90741) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (90751) [mwifi, 379]: channel               : 13[0m
+[0;32mI (90751) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (90761) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (94771) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (94771) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (94771) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (94781) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (94791) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (94791) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (94801) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (94801) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (94811) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (94811) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (94821) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (94831) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (94831) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (94841) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (94841) [mwifi, 352]: topology              : 0[0m
+[0;32mI (94851) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (94851) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (94861) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (94871) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (94871) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (94881) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (94881) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (94891) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (94891) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (94901) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (94901) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (94911) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (94921) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (94921) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (94931) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (94941) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (94941) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (94951) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (94961) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (94961) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (94971) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (94971) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (94981) [mwifi, 379]: channel               : 13[0m
+[0;32mI (94981) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (94991) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (99001) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (99001) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (99001) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (99011) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (99011) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (99021) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (99031) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (99031) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (99041) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (99041) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (99051) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (99051) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (99061) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (99071) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (99071) [mwifi, 352]: topology              : 0[0m
+[0;32mI (99081) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (99081) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (99091) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (99091) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (99101) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (99111) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (99111) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (99121) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (99121) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (99131) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (99131) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (99141) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (99151) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (99151) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (99161) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (99161) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (99171) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (99181) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (99191) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (99191) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (99201) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (99201) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (99211) [mwifi, 379]: channel               : 13[0m
+[0;32mI (99211) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (99221) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (103231) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (103231) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (103231) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (103241) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (103241) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (103251) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (103261) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (103261) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (103271) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (103271) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (103281) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (103291) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (103291) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (103301) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (103301) [mwifi, 352]: topology              : 0[0m
+[0;32mI (103311) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (103311) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (103321) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (103331) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (103331) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (103341) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (103341) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (103351) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (103351) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (103361) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (103371) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (103371) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (103381) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (103381) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (103391) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (103401) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (103401) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (103411) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (103421) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (103421) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (103431) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (103441) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (103441) [mwifi, 379]: channel               : 13[0m
+[0;32mI (103451) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (103451) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (107461) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (107461) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (107461) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (107471) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (107471) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (107481) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (107491) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (107491) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (107501) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (107501) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (107511) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (107521) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (107521) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (107531) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (107531) [mwifi, 352]: topology              : 0[0m
+[0;32mI (107541) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (107541) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (107551) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (107561) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (107561) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (107571) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (107571) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (107581) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (107581) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (107591) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (107601) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (107601) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (107611) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (107611) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (107621) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (107631) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (107631) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (107641) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (107651) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (107651) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (107661) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (107671) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (107671) [mwifi, 379]: channel               : 13[0m
+[0;32mI (107681) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (107681) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (111691) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (111691) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (111691) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (111701) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (111701) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (111711) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (111721) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (111721) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (111731) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (111731) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (111741) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (111751) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (111751) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (111761) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (111761) [mwifi, 352]: topology              : 0[0m
+[0;32mI (111771) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (111771) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (111781) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (111791) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (111791) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (111801) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (111801) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (111811) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (111811) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (111821) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (111831) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (111831) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (111841) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (111841) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (111851) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (111861) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (111861) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (111871) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (111881) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (111881) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (111891) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (111901) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (111901) [mwifi, 379]: channel               : 13[0m
+[0;32mI (111911) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (111911) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (115921) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (115921) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (115921) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (115931) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (115931) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (115941) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (115951) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (115951) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (115961) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (115961) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (115971) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (115981) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (115981) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (115991) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (115991) [mwifi, 352]: topology              : 0[0m
+[0;32mI (116001) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (116001) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (116011) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (116021) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (116021) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (116031) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (116031) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (116041) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (116041) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (116051) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (116061) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (116061) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (116071) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (116071) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (116081) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (116091) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (116091) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (116101) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (116111) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (116111) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (116121) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (116131) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (116131) [mwifi, 379]: channel               : 13[0m
+[0;32mI (116141) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (116141) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (120151) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (120151) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (120151) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (120161) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (120161) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (120171) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (120181) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (120181) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (120191) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (120191) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (120201) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (120211) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (120211) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (120221) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (120221) [mwifi, 352]: topology              : 0[0m
+[0;32mI (120231) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (120231) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (120241) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (120251) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (120251) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (120261) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (120261) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (120271) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (120271) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (120281) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (120291) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (120291) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (120301) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (120301) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (120311) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (120321) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (120321) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (120331) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (120341) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (120341) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (120351) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (120361) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (120361) [mwifi, 379]: channel               : 13[0m
+[0;32mI (120371) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (120371) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (124381) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (124381) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (124381) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (124391) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (124391) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (124401) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (124411) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (124411) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (124421) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (124421) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (124431) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (124441) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (124441) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (124451) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (124451) [mwifi, 352]: topology              : 0[0m
+[0;32mI (124461) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (124461) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (124471) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (124481) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (124481) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (124491) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (124491) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (124501) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (124501) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (124511) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (124521) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (124521) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (124531) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (124531) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (124541) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (124551) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (124551) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (124561) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (124571) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (124571) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (124581) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (124591) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (124591) [mwifi, 379]: channel               : 13[0m
+[0;32mI (124601) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (124601) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (128611) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (128611) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (128611) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (128621) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (128621) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (128631) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (128641) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (128641) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (128651) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (128651) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (128661) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (128671) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (128671) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (128681) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (128681) [mwifi, 352]: topology              : 0[0m
+[0;32mI (128691) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (128691) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (128701) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (128711) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (128711) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (128721) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (128721) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (128731) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (128731) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (128741) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (128751) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (128751) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (128761) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (128761) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (128771) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (128781) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (128781) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (128791) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (128801) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (128801) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (128811) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (128821) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (128821) [mwifi, 379]: channel               : 13[0m
+[0;32mI (128831) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (128831) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (132841) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (132841) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (132841) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (132851) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (132851) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (132861) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (132871) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (132871) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (132881) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (132881) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (132891) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (132901) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (132901) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (132911) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (132911) [mwifi, 352]: topology              : 0[0m
+[0;32mI (132921) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (132921) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (132931) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (132941) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (132941) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (132951) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (132951) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (132961) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (132961) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (132971) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (132981) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (132981) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (132991) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (132991) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (133001) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (133011) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (133011) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (133021) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (133031) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (133031) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (133041) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (133051) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (133051) [mwifi, 379]: channel               : 13[0m
+[0;32mI (133061) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (133061) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (137071) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (137071) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (137071) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (137081) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (137081) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (137091) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (137101) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (137101) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (137111) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (137111) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (137121) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (137131) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (137131) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (137141) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (137141) [mwifi, 352]: topology              : 0[0m
+[0;32mI (137151) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (137151) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (137161) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (137171) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (137171) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (137181) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (137181) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (137191) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (137191) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (137201) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (137211) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (137211) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (137221) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (137221) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (137231) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (137241) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (137241) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (137251) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (137261) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (137261) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (137271) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (137281) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (137281) [mwifi, 379]: channel               : 13[0m
+[0;32mI (137291) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (137291) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (141301) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (141301) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (141301) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (141311) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (141311) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (141321) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (141331) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (141331) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (141341) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (141341) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (141351) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (141361) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (141361) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (141371) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (141371) [mwifi, 352]: topology              : 0[0m
+[0;32mI (141381) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (141381) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (141391) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (141401) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (141401) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (141411) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (141411) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (141421) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (141421) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (141431) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (141441) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (141441) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (141451) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (141451) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (141461) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (141471) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (141471) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (141481) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (141491) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (141491) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (141501) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (141511) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (141511) [mwifi, 379]: channel               : 13[0m
+[0;32mI (141521) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (141521) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (145531) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (145531) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (145531) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (145541) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (145541) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (145551) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (145561) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (145561) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (145571) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (145571) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (145581) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (145591) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (145591) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (145601) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (145601) [mwifi, 352]: topology              : 0[0m
+[0;32mI (145611) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (145611) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (145621) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (145631) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (145631) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (145641) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (145641) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (145651) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (145651) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (145661) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (145671) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (145671) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (145681) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (145681) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (145691) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (145701) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (145701) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (145711) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (145721) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (145721) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (145731) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (145741) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (145741) [mwifi, 379]: channel               : 13[0m
+[0;32mI (145751) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (145751) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (149761) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (149761) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (149761) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (149771) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (149771) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (149781) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (149791) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (149791) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (149801) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (149801) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (149811) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (149821) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (149821) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (149831) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (149831) [mwifi, 352]: topology              : 0[0m
+[0;32mI (149841) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (149841) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (149851) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (149861) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (149861) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (149871) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (149871) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (149881) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (149881) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (149891) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (149901) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (149901) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (149911) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (149911) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (149921) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (149931) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (149931) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (149941) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (149951) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (149951) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (149961) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (149971) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (149971) [mwifi, 379]: channel               : 13[0m
+[0;32mI (149981) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (149981) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (153991) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (153991) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (153991) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (154001) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (154001) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (154011) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (154021) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (154021) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (154031) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (154031) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (154041) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (154051) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (154051) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (154061) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (154061) [mwifi, 352]: topology              : 0[0m
+[0;32mI (154071) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (154071) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (154081) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (154091) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (154091) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (154101) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (154101) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (154111) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (154111) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (154121) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (154131) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (154131) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (154141) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (154141) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (154151) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (154161) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (154161) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (154171) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (154181) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (154181) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (154191) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (154201) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (154201) [mwifi, 379]: channel               : 13[0m
+[0;32mI (154211) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (154211) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (158221) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (158221) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (158221) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (158231) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (158231) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (158241) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (158251) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (158251) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (158261) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (158261) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (158271) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (158281) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (158281) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (158291) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (158291) [mwifi, 352]: topology              : 0[0m
+[0;32mI (158301) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (158301) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (158311) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (158321) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (158321) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (158331) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (158331) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (158341) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (158341) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (158351) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (158361) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (158361) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (158371) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (158371) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (158381) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (158391) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (158391) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (158401) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (158411) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (158411) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (158421) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (158431) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (158431) [mwifi, 379]: channel               : 13[0m
+[0;32mI (158441) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (158441) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
+ ------------------------------configuration of mesh wifi------------
+[0;32mI (162451) [mwifi, 337]: **************** Root config ****************[0m
+[0;32mI (162451) [mwifi, 338]: vote_percentage       : 0.90[0m
+[0;32mI (162451) [mwifi, 339]: vote_max_count        : 15[0m
+[0;32mI (162461) [mwifi, 340]: backoff_rssi          : -78[0m
+[0;32mI (162461) [mwifi, 341]: scan_min_count        : 10[0m
+[0;32mI (162471) [mwifi, 342]: attempt_count         : 60[0m
+[0;32mI (162481) [mwifi, 343]: monitor_ie_count      : 10[0m
+[0;32mI (162481) [mwifi, 344]: root_healing_ms       : 6000[0m
+[0;32mI (162491) [mwifi, 345]: root_conflicts_enable : false[0m
+[0;32mI (162491) [mwifi, 346]: fix_root_enable       : true[0m
+[0;32mI (162501) [mwifi, 348]: ****************  Capacity   ****************[0m
+[0;32mI (162511) [mwifi, 349]: max_layer             : 4[0m
+[0;32mI (162511) [mwifi, 350]: max_connection        : 6[0m
+[0;32mI (162521) [mwifi, 351]: capacity_num          : 10[0m
+[0;32mI (162521) [mwifi, 352]: topology              : 0[0m
+[0;32mI (162531) [mwifi, 354]: ****************  Stability  ****************[0m
+[0;32mI (162531) [mwifi, 355]: assoc_expire_ms       : 30000[0m
+[0;32mI (162541) [mwifi, 357]: beacon_interval_ms    : 300[0m
+[0;32mI (162551) [mwifi, 358]: passive_scan_ms       : 600[0m
+[0;32mI (162551) [mwifi, 359]: monitor_duration_ms   : 60000[0m
+[0;32mI (162561) [mwifi, 360]: cnx_rssi              : -120[0m
+[0;32mI (162561) [mwifi, 361]: select_rssi           : -78[0m
+[0;32mI (162571) [mwifi, 362]: switch_rssi           : -78[0m
+[0;32mI (162571) [mwifi, 363]: rssi_threshoud_high   : -78[0m
+[0;32mI (162581) [mwifi, 364]: rssi_threshoud_medium : -82[0m
+[0;32mI (162591) [mwifi, 365]: rssi_threshoud_low    : -85[0m
+[0;32mI (162591) [mwifi, 367]: **************** Transmission ****************[0m
+[0;32mI (162601) [mwifi, 368]: xon_qsize             : 32[0m
+[0;32mI (162601) [mwifi, 369]: retransmit_enable     : true[0m
+[0;32mI (162611) [mwifi, 371]: **************** Router info  ****************[0m
+[0;32mI (162621) [mwifi, 372]: ssid                  : Fibertel WiFi157 2.4GHz[0m
+[0;32mI (162621) [mwifi, 373]: password              : 0141234567[0m
+[0;32mI (162631) [mwifi, 374]: bssid                 : 00:00:00:00:00:00[0m
+[0;32mI (162641) [mwifi, 375]: mesh_type             : root[0m
+[0;32mI (162641) [mwifi, 376]: mesh_id               : 4c:4d:4d:45:53:48[0m
+[0;32mI (162651) [mwifi, 377]: mesh_password         : [0m
+[0;32mI (162661) [mwifi, 378]: mesh_authmode         : 0[0m
+[0;32mI (162661) [mwifi, 379]: channel               : 13[0m
+[0;32mI (162671) [mwifi, 380]: allow_router_switch   : true[0m
+[0;32mI (162671) [mwifi, 381]: allow_channel_switch  : true[0m
+ ------------------------------end of mesh wifi------------
