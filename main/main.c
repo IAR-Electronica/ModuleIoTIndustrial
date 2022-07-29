@@ -11,8 +11,8 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#define ROUTER_SSID "Fibertel WiFi157 2.4GHz" 
-#define ROUTER_PASSWORD "0141234567" 
+#define ROUTER_SSID "" 
+#define ROUTER_PASSWORD "" 
 
 #include "archivo.c"
 #include "mwifi.h"
