@@ -11,15 +11,46 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-#define ROUTER_SSID "" 
+#define ROUTER_SSID "local" 
 #define ROUTER_PASSWORD "" 
+#define WIFI_CONNECTED_BIT BIT0
+#define WIFI_FAIL_BIT      BIT1
 
 #include "archivo.c"
 #include "mwifi.h"
 #include "mdf_common.h"
 // #define MEMORY_DEBUG
-
+static EventGroupHandle_t s_wifi_event_group; 
 static const char *TAG = "get_started";
+/**
+ * @brief 
+ * 
+ * @param arg 
+ * @param event_base 
+ * @param event_id 
+ * @param event_data 
+ */
+
+static void event_handler_wifi(void* arg, esp_event_base_t event_base,
+                                int32_t event_id, void* event_data)
+{
+    if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_START) {
+        esp_wifi_connect();
+    } else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED) {
+        xEventGroupSetBits(s_wifi_event_group, WIFI_FAIL_BIT);
+        ESP_LOGI(TAG,"connect to the AP fail");
+    } else if (event_base == IP_EVENT && event_id == IP_EVENT_STA_GOT_IP) {
+        ip_event_got_ip_t* event = (ip_event_got_ip_t*) event_data;
+        ESP_LOGI(TAG, "got ip:" IPSTR, IP2STR(&event->ip_info.ip));
+        xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
+    }
+
+}
+
+
+
+
+
 
 static void root_task(void *arg)
 {
@@ -151,26 +182,49 @@ static void print_system_info_timercb(void *timer)
 
 static mdf_err_t wifi_init()
 {
-    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
-    mdf_err_t ret          = nvs_flash_init();
+    //!CREATE EVENT FOR WIFI FOR OBTAIN LOCAL Ip
+    s_wifi_event_group = xEventGroupCreate();
+    esp_event_handler_instance_t instance_any_id;
+    esp_event_handler_instance_t instance_got_ip;
 
+    wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT(); //! obtiene configuraciòn wifi por defecto(use idf.py menuconfig)
+    mdf_err_t ret          = nvs_flash_init();
+    ///! registers event 
+   /* esp_event_handler_instance_register(WIFI_EVENT,
+                                                        ESP_EVENT_ANY_ID,
+                                                        &event_handler_wifi,
+                                                        NULL,
+                                                        &instance_any_id);
+    esp_event_handler_instance_register(IP_EVENT,
+                                                        IP_EVENT_STA_GOT_IP,
+                                                        &event_handler_wifi,
+                                                        NULL,
+                                                        &instance_got_ip) ; */ 
+    
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         MDF_ERROR_ASSERT(nvs_flash_erase());
         ret = nvs_flash_init();
     }
 
-    MDF_ERROR_ASSERT(ret);
-
+    //tcpip_adapter_init();           ///! instrucción magica ... no tocar ... sin esto no vivimos  
     MDF_ERROR_ASSERT(esp_netif_init());
-    MDF_ERROR_ASSERT(esp_event_loop_create_default());
-//    MDF_ERROR_ASSERT(esp_event_loop_init(NULL,NULL));
+    MDF_ERROR_ASSERT(ret);
     
-    MDF_ERROR_ASSERT(esp_wifi_init(&cfg));
+    MDF_ERROR_ASSERT(esp_event_loop_create_default());
+    MDF_ERROR_ASSERT(esp_wifi_init(&cfg)); ///! 
     MDF_ERROR_ASSERT(esp_wifi_set_storage(WIFI_STORAGE_FLASH));
     MDF_ERROR_ASSERT(esp_wifi_set_mode(WIFI_MODE_STA));
     MDF_ERROR_ASSERT(esp_wifi_set_ps(WIFI_PS_NONE));
     MDF_ERROR_ASSERT(esp_mesh_set_6m_rate(false)); /// tasa de transmisión API-REFERENCE no es clara 
     MDF_ERROR_ASSERT(esp_wifi_start());
+    /*EventBits_t bits = xEventGroupWaitBits(s_wifi_event_group,
+            WIFI_CONNECTED_BIT | WIFI_FAIL_BIT,
+            pdFALSE,
+            pdFALSE,
+            (TickType_t) 0);
+    */
+    //vEventGroupDelete(s_wifi_event_group);
+    printf("---------------------------end wifi init --------------------------------------\r\n") ; 
 
     return MDF_OK;
 }
@@ -191,15 +245,38 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
         case MDF_EVENT_MWIFI_STARTED:
             MDF_LOGI("MESH is started");
             break;
-
         case MDF_EVENT_MWIFI_PARENT_CONNECTED:
             MDF_LOGI("Parent is connected on station interface");
+            if (esp_mesh_is_root()) {
+                printf("im root \r\n") ; 
+            }
             break;
-
+        case MDF_EVENT_MWIFI_ROOT_ADDRESS:
+            printf("mdf_event_root_address \r\n") ; 
+            break ; 
+        case MDF_EVENT_MWIFI_CHILD_CONNECTED:
+           
+            MDF_LOGI("child connected event ") ; 
+           // printf(" ----------------end event child ------------------\r\n ") ; 
+            break ;
+        case MDF_EVENT_MWIFI_CHILD_DISCONNECTED:
+            printf(" ----------------event child_disc ------------------\r\n ") ; 
+            MDF_LOGI("child disconnected event ") ; 
+            printf(" ----------------end event child_disc ------------------\r\n") ; 
+            break ;
         case MDF_EVENT_MWIFI_PARENT_DISCONNECTED:
             MDF_LOGI("Parent is disconnected on station interface");
             break;
-
+        case MDF_EVENT_MWIFI_ROOT_GOT_IP://MDF_EVENT_MWIFI_ROOT_GOT_IP
+            MDF_LOGI("EVENT_MWIFI_ROOT_GOOT_IP") ;     
+            MDF_LOGI("Root obtains the IP address. It is posted by LwIP stack automatically");
+            break; 
+        case MDF_EVENT_MWIFI_EXCEPTION:
+            printf("MDF_MWIFI_EXCEPTION\r\n") ; 
+            break ; 
+        case MDF_EVENT_MWIFI_STOPPED:
+            MDF_LOGI("MWIFI IS IS TOPPED ") ; 
+            break ; 
         default:
             break;
     }
@@ -210,9 +287,9 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 
 void vPrintMeshInfo(void *pv){
     TickType_t ticks_delay = 4000/portTICK_RATE_MS ; 
-    while(1){
-        printf(" ------------------------------configuration of mesh wifi------------\r\n") ; 
-        mwifi_print_config() ; 
+ 
+    for(;;){
+        printf(" ------------------------------configuration of mesh wifi------------\r\n") ;         
         printf(" ------------------------------end of mesh wifi------------\r\n") ; 
         vTaskDelay(ticks_delay) ; 
     }
@@ -231,7 +308,7 @@ void app_main()
             !FIXED USING THIS VALUES: MESH_ROOT,MESH_IDLE ,MESH_NODE. IF USE "CONFIG_DEVICE_TYPE "
             CONFIGURE DEVICE WITH "make menuconfig" or idf.py menuconfig ! 
         */
-        .mesh_type = MESH_ROOT, 
+        .mesh_type =  MWIFI_MESH_ROOT, 
     };
 
     /**
@@ -243,15 +320,16 @@ void app_main()
     /**
      * @brief Initialize wifi mesh.
      */
+    MDF_ERROR_ASSERT(mdf_event_loop_init(event_loop_cb)); //??   
     MDF_ERROR_ASSERT(wifi_init());
-    MDF_ERROR_ASSERT(mwifi_init(&cfg));
+  /*  MDF_ERROR_ASSERT(mwifi_init(&cfg));
     MDF_ERROR_ASSERT(mwifi_set_config(&config));
-    MDF_ERROR_ASSERT(mdf_event_loop_init(event_loop_cb));
-    MDF_ERROR_ASSERT(mwifi_start());
+   // MDF_ERROR_ASSERT(mdf_event_loop(event_loop_cb,NULL));
+    MDF_ERROR_ASSERT(mwifi_start());*/
     /**
      * @brief Data transfer between wifi mesh devices
      */
-    if (config.mesh_type == MESH_ROOT) {
+   /* if (config.mesh_type == MESH_ROOT) {
         xTaskCreate(root_task, "root_task", 4 * 1024,
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
     } else {
@@ -259,10 +337,10 @@ void app_main()
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
         xTaskCreate(node_read_task, "node_read_task", 4 * 1024,
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
-    }
+    }*/
 
-    xTaskCreate(vPrintMeshInfo,"printMeshInfo", 5*1024,NULL,
-                CONFIG_MDF_TASK_DEFAULT_PRIOTY+1UL, NULL ) ; 
+    //xTaskCreate(vPrintMeshInfo,"printMeshInfo", 5*1024,NULL,
+      //         CONFIG_MDF_TASK_DEFAULT_PRIOTY+1UL, NULL ) ; 
     //  xTaskCreate(vTaskGetADC, "taskADC", 3 * 1024,
     //               NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY-1, NULL);
     //*< timer for print information ! 
