@@ -393,22 +393,23 @@ void app_main()
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT(); ///! configure using idf.py menuconfig
 //    mwifi_init_config_t cfg = { -.. } custom configurations 
     mwifi_config_t config ={
-        .router_ssid = ROUTER_SSID, 
-        .router_password  = ROUTER_PASSWORD , 
+        .router_ssid = "Fibertel WiFi157 2.4GHz", 
+        .router_password  = "0141234567", 
         .channel   = CONFIG_MESH_CHANNEL,
         .mesh_id   = CONFIG_MESH_ID,
+        .mesh_password = "hola-mundo",
         /*
             !FIXED USING THIS VALUES: MESH_ROOT,MESH_IDLE ,MESH_NODE. IF USE "CONFIG_DEVICE_TYPE "
             CONFIGURE DEVICE WITH "make menuconfig" or idf.py menuconfig ! 
         */
-        .mesh_type =  MWIFI_MESH_ROOT, 
+        .mesh_type =  MWIFI_MESH_LEAF 
     };
 
     /**
      * @brief Set the log level for serial port printing.
      */
-    // esp_log_level_set("*", ESP_LOG_INFO);
-    // esp_log_level_set(TAG, ESP_LOG_DEBUG);
+    esp_log_level_set("*", ESP_LOG_INFO);
+    esp_log_level_set(TAG, ESP_LOG_DEBUG);
 
     /**
      * @brief Initialize wifi mesh.

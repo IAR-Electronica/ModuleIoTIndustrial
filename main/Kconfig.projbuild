@@ -43,30 +43,29 @@ endmenu
 
 menu "conf of meshwifi"
 
-    choice DEVICE_TYPE
-        bool "configure device type"
-        default DEVICE_TYPE_NODE
-        help
-            configura como root o nodo
+#   choice DEVICE_TYPE
+#        bool "configure device type"
+#        default DEVICE_TYPE_NODE
+#        help
+#            configura como root o nodo
     
-    config DEVICE_TYPE_ROOT
-        bool "root device"
+ #   config DEVICE_TYPE_ROOT
+ #       bool "root device"
     
-    config DEVICE_TYPE_NODE
-        bool "non-root-device"
+ #   config DEVICE_TYPE_NODE
+ #       bool "non-root-device"
 
-    endchoice
+ #   endchoice
         
-    config DEVICE_TYPE
-        int 
-        default 1 if DEVICE_TYPE_ROOT
-        default 2 if DEVICE_TYPE_NODE
+ #   config DEVICE_TYPE
+ #       int 
+ #       default 1 if DEVICE_TYPE_ROOT
+ #       default 2 if DEVICE_TYPE_NODE
     
     config MESH_ID
         string "MESH ID"
             default "123456"
-            help 
-                
+            help  
                 crea el mesh id
     
     config MESH_CHANNEL
@@ -75,11 +74,19 @@ menu "conf of meshwifi"
         default 13
         help    
             mesh net channel select 
+            
+    config MESH_PASSWORD
+        string  "mesh_pwd"
+        default "1234"
+        help    
+            mesh net password select 
+
     config SERVER_IP
         string "Server IP address"
             default "192.168.0.1"
             help
-              Server IP address.            
+              Server IP address. 
+                         
     config SERVER_PORT
         int "Server port"
         default "8070"

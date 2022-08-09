@@ -33,7 +33,12 @@ void vTaskInfoNode(void *pv){
     gpio_set_direction(IDLE_LED_GPIO , GPIO_MODE_OUTPUT) ; 
     gpio_set_direction(NODE_LED_GPIO , GPIO_MODE_OUTPUT) ; 
     while(1){ 
-        mwifi_get_config(&config_mesh) ; 
+        printf(" --------------------------------------------------\r\n") ; 
+        mwifi_get_config(&config_mesh) ;   
+        printf("messhh value: %d  \r\n", config_mesh.mesh_type); 
+        printf("messhh value: %d  \r\n",  esp_mesh_get_type()); 
+        
+        printf(" --------------------------------------------------\r\n") ;         
         switch(config_mesh.mesh_type){
             case MWIFI_MESH_IDLE:
                 gpio_set_level(LEAF_LED_GPIO,0) ;
