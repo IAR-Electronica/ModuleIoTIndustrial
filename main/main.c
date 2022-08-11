@@ -291,6 +291,8 @@ static mdf_err_t wifi_init()
     //!CREATE EVENT FOR WIFI FOR OBTAIN LOCAL Ip
    
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT(); //! obtiene configuraciòn wifi por defecto(use idf.py menuconfig)
+     
+    //printf("station_interface: %s \r\n",cfg.ap.ssid) ; 
     mdf_err_t ret          = nvs_flash_init();
    
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -370,6 +372,10 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
         case MDF_EVENT_MWIFI_STOPPED:
             MDF_LOGI("MWIFI IS IS TOPPED ") ; 
             break ; 
+        case MESH_EVENT_FIND_NETWORK:
+            MDF_LOGI("mesh_event_find_network") ; 
+            break ; 
+            
         default:
             break;
     }
@@ -393,8 +399,8 @@ void app_main()
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT(); ///! configure using idf.py menuconfig
 //    mwifi_init_config_t cfg = { -.. } custom configurations 
     mwifi_config_t config ={
-        .router_ssid = "Fibertel WiFi157 2.4GHz", 
-        .router_password  = "0141234567", 
+        .router_ssid = "", 
+        .router_password  = "", 
         .channel   = CONFIG_MESH_CHANNEL,
         .mesh_id   = CONFIG_MESH_ID,
         .mesh_password = "hola-mundo",
@@ -402,7 +408,7 @@ void app_main()
             !FIXED USING THIS VALUES: MESH_ROOT,MESH_IDLE ,MESH_NODE. IF USE "CONFIG_DEVICE_TYPE "
             CONFIGURE DEVICE WITH "make menuconfig" or idf.py menuconfig ! 
         */
-        .mesh_type =  MWIFI_MESH_LEAF 
+        //.mesh_type =  MWIFI_MESH_LEAF 
     };
 
     /**
@@ -420,11 +426,11 @@ void app_main()
     MDF_ERROR_ASSERT(mwifi_set_config(&config));
     MDF_ERROR_ASSERT(mwifi_start());
     ///! ver que son los grupos 
-    const uint8_t group_id_list[2][6] = {{0x01, 0x00, 0x5e, 0xae, 0xae, 0xae},
-                                        {0x01, 0x00, 0x5e, 0xae, 0xae, 0xaf}};
+    //const uint8_t group_id_list[2][6] = {{0x01, 0x00, 0x5e, 0xae, 0xae, 0xae},
+    //                                    {0x01, 0x00, 0x5e, 0xae, 0xae, 0xaf}};
 
-    MDF_ERROR_ASSERT(esp_mesh_set_group_id((mesh_addr_t *)group_id_list,
-                                           sizeof(group_id_list) / sizeof(group_id_list[0])));
+    //MDF_ERROR_ASSERT(esp_mesh_set_group_id((mesh_addr_t *)group_id_list,
+      //                                     sizeof(group_id_list) / sizeof(group_id_list[0])));
 
 
 
@@ -435,6 +441,6 @@ void app_main()
    
     xTaskCreate(vTaskInfoNode,"togle_led_info", 4*1024,NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
     //TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
-    //                                     true, NULL, print_system_info_timercb);
+    //                                    true, NULL, print_system_info_timercb);
     //xTimerStart(timer, 0);
 }
