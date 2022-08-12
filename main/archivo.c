@@ -26,6 +26,9 @@ void vTaskInfoNode(void *pv){
     ///! CONFIGURACIÒN DE PUERTOS GPIO para realizar el prendido de leds para debugger  
     //wifi_ap_record_t ap_data ; 
     wifi_config_t conf_wifi ; 
+    uint8_t mac_address_ap[6] ; 
+    uint8_t mac_address_sta[6] ; 
+
     gpio_reset_pin(LEAF_LED_GPIO) ; 
     gpio_reset_pin(ROOT_LED_GPIO) ; 
     gpio_reset_pin(IDLE_LED_GPIO) ; 
@@ -36,19 +39,24 @@ void vTaskInfoNode(void *pv){
     gpio_set_direction(NODE_LED_GPIO , GPIO_MODE_OUTPUT) ; 
     while(1){ 
        printf(" --------------------------------------------------\r\n") ; 
-        //mwifi_get_config(&config_mesh) ;   
-        //esp_mesh_get_config(&config) ; 
-        //esp_wifi_sta_get_ap_info(&ap_data) ; 
-       // esp_wifi_get_config(WIFI_IF_AP ,&conf_wifi) ; 
-       // printf("config_router_ssid: %s \r\n", conf_wifi.sta.ssid) ;  
-       // printf("config_router_pass: %s \r\n", conf_wifi.sta.password) ;  
-        //mwifi_print_config() ; 
-       /*
-        printf("messhh value: %d  \r\n", config_mesh.mesh_type); 
-        printf("ap config: %s\r\n",config_mesh.router_ssid) ; 
-        printf("ap config: %s\r\n",config_mesh.router_password) ; 
+        // mwifi_get_config(&config_mesh) ;   
+        // esp_mesh_get_config(&config) ; 
+        // esp_wifi_sta_get_ap_info(&ap_data) ; 
+        // printf("config_router_ssid: %s \r\n", conf_wifi.sta.ssid) ;  
+        // printf("config_router_pass: %s \r\n", conf_wifi.sta.password) ;  
+        // mwifi_print_config() ; 
+        /*
+         printf("messhh value: %d  \r\n", config_mesh.mesh_type); 
+         printf("ap config: %s\r\n",config_mesh.router_ssid) ; 
+         printf("ap config: %s\r\n",config_mesh.router_password) ; 
         */  
-        printf("messhh value: %d  \r\n",  esp_mesh_get_type()); 
+        esp_wifi_get_config(WIFI_IF_AP ,&conf_wifi)    ; 
+        esp_wifi_get_mac(WIFI_IF_AP,mac_address_sta)  ;
+
+        printf("mesh type: %d   \r\n",  esp_mesh_get_type()); 
+        printf("ap config: %s   \r\n",conf_wifi.sta.ssid) ; 
+        printf("mac_sta: %02x %02x %02x %02x %02x %02x \r\n",mac_address_sta[0],mac_address_sta[1],mac_address_sta[2],
+                                                                  mac_address_sta[3], mac_address_sta[4],mac_address_sta[5]) ; 
         // mwifi_print_config() ; 
         // mwifi_get_config()
         printf(" --------------------------------------------------\r\n") ;         

@@ -399,8 +399,8 @@ void app_main()
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT(); ///! configure using idf.py menuconfig
 //    mwifi_init_config_t cfg = { -.. } custom configurations 
     mwifi_config_t config ={
-        .router_ssid = "", 
-        .router_password  = "", 
+        .router_ssid = "local", 
+        .router_password  = "iarpublicas", 
         .channel   = CONFIG_MESH_CHANNEL,
         .mesh_id   = CONFIG_MESH_ID,
         .mesh_password = "hola-mundo",
