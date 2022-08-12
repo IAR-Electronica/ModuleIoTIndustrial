@@ -439,8 +439,8 @@ void app_main()
     xTaskCreate(node_read_task, "node_read_task", 4 * 1024,
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
    
-    xTaskCreate(vTaskInfoNode,"togle_led_info", 4*1024,NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
-    //TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
+    xTaskCreate(vTaskInfoNode,"togle_led_info", 4*4096,NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
+    // TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
     //                                    true, NULL, print_system_info_timercb);
-    //xTimerStart(timer, 0);
+    // xTimerStart(timer, 0);
 }
