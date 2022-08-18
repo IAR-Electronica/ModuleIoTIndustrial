@@ -27,7 +27,7 @@ void vTaskInfoNode(void *pv){
     // wifi_ap_record_t ap_data ; 
     wifi_config_t conf_wifi_ap   ; 
     wifi_config_t conf_wifi_sta  ; 
-    mesh_addr_t *mesh_data_table  ; //= NULL ; 
+    mesh_addr_t mesh_data_table[6]  ; //= NULL ; 
     //mesh_addr_t *nodes_table     ; // = NULL ; 
     
     uint8_t mac_address_ap[6] ; 
@@ -62,7 +62,7 @@ void vTaskInfoNode(void *pv){
        esp_wifi_get_config(WIFI_IF_STA ,&conf_wifi_sta)    ; 
        esp_wifi_get_mac(WIFI_IF_STA,mac_address_sta)  ;
        size_table_routing_main = esp_mesh_get_routing_table_size() ; 
-       esp_mesh_get_routing_table(&mesh_data_table, size_table_routing_main, &size_table_routing_response) ; 
+       esp_mesh_get_routing_table((mesh_addr_t *)&mesh_data_table, sizeof(mesh_addr_t)*6, &size_table_routing_response) ; 
        //esp_mesh_get_subnet_nodes_list(mesh_data_table, nodes_table ,size_table_routing_main) ; 
        printf("mesh type: %d   \r\n",  esp_mesh_get_type()); 
        printf("ssid_ap:   %s   \r\n",conf_wifi_ap.sta.ssid) ; 
@@ -76,7 +76,7 @@ void vTaskInfoNode(void *pv){
        if (size_table_routing_main != 0){
             int index = 0 ; 
             for (index = 0 ; index<size_table_routing_main;index++){
-                uint8_t mac_0 = *(mesh_data_table->addr[0]) ; 
+                uint8_t mac_0 =(uint8_t *) mesh_data_table[0].addr[0] ; 
                 printf("MAC_ADDRESSS_NODES: %02x  \r\n",mac_0 ) ; 
             }
 
