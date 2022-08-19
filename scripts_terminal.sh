@@ -6,14 +6,13 @@ command_dev2=$3 #
 command_dev3=$4 #
 
 dev_0=' idf.py monitor -p '
-dev_0="$dev_0$command_dev0"
-# --before default_reset --after hard_reset --chip esp32 write_flash --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 bootloader/bootloader.bin 0x10000 new_prh.bin 0x8000 partition_table/partition-table.bin 
+dev_0="$dev_0$command_dev0 --timestamps"
 dev_1=' idf.py monitor -p '
-dev_1="$dev_1$command_dev1"
+dev_1="$dev_1$command_dev1 --timestamps"
 dev_2=' idf.py monitor -p '
-dev_2="$dev_2$command_dev2"
+dev_2="$dev_2$command_dev2 --timestamps"
 dev_3=' idf.py monitor -p '
-dev_3="$dev_3$command_dev3"
+dev_3="$dev_3$command_dev3 --timestamps"
 
 command_open_idf_dev0='. $HOME/esp/esp-idf/export.sh; ' #
 command_open_idf_dev1='. $HOME/esp/esp-idf/export.sh; ' 

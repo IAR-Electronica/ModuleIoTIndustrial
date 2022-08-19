@@ -399,8 +399,8 @@ void app_main()
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT(); ///! configure using idf.py menuconfig
 //    mwifi_init_config_t cfg = { -.. } custom configurations 
     mwifi_config_t config ={
-        .router_ssid = "local", 
-        .router_password  = "iarpublicas", 
+        .router_ssid = "", 
+        .router_password  = "", 
         .channel   = CONFIG_MESH_CHANNEL,
         .mesh_id   = CONFIG_MESH_ID,
         .mesh_password = "hola-mundo",
@@ -426,11 +426,11 @@ void app_main()
     MDF_ERROR_ASSERT(mwifi_set_config(&config));
     MDF_ERROR_ASSERT(mwifi_start());
     ///! ver que son los grupos 
-    //const uint8_t group_id_list[2][6] = {{0x01, 0x00, 0x5e, 0xae, 0xae, 0xae},
-    //                                    {0x01, 0x00, 0x5e, 0xae, 0xae, 0xaf}};
+    const uint8_t group_id_list[2][6] = {{0x01, 0x00, 0x5e, 0xae, 0xae, 0xae},
+                                        {0x01, 0x00, 0x5e, 0xae, 0xae, 0xaf}};
 
-    //MDF_ERROR_ASSERT(esp_mesh_set_group_id((mesh_addr_t *)group_id_list,
-      //                                     sizeof(group_id_list) / sizeof(group_id_list[0])));
+    MDF_ERROR_ASSERT(esp_mesh_set_group_id((mesh_addr_t *)group_id_list,
+                                         sizeof(group_id_list) / sizeof(group_id_list[0])));
 
 
 
@@ -440,7 +440,7 @@ void app_main()
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
    
     xTaskCreate(vTaskInfoNode,"togle_led_info", 4*4096,NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
-    // TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
-    //                                    true, NULL, print_system_info_timercb);
-    // xTimerStart(timer, 0);
+    TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
+                                        true, NULL, print_system_info_timercb);
+    xTimerStart(timer, 0);
 }
