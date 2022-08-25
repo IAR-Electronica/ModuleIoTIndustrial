@@ -1,95 +1,40 @@
-menu "Ejemplo de configuracion"
+menu "Example Configuration"
 
-config WIFI_SSID
-    string "Wi-Fi ssid"
-    default "myssid"
-
-config WIFI_PSWD
-    string "Wi-Fi password"
-    default "mypassword"
-
-config DEVICE_VERSION
-    string "Device version"
-    default "1.0.0"
-
-menu "aliyun config"
-    config ALIYUN_META_PRODUCT_KEY
-        string "Aliyun product key"
-        default "xxxx"
-        help 
-            Aliyun product key.
-
-    config ALIYUN_META_PRODUCT_SECRET
-        string "Aliyun product secret"
-        default "xxxx"
+config ROUTER_SSID
+    string "Router SSID"
+        default "ROUTER_SSID"
         help
-            Aliyun product secret.
+            Router SSID.
 
-    config ALIYUN_META_DEVICE_NAME
-        string "Aliyun device name"
-        default "xxxx"
-        help 
-            Aliyun device name
-
-    config ALIYUN_META_DEVICE_SECRET
-        string "Aliyun device secret"
-        default "xxxx"
+config ROUTER_PASSWORD
+    string "Router password"
+        default "ROUTER_PASSWORD"
         help
-            Aliyun device secret
-endmenu
+            Router password.
 
-endmenu
+config MESH_ID
+    string "Mesh ID"
+        default "123456"
+        help
+            Mesh network identification, Nodes with the same mesh ID can
+            communicate with each other.
 
+config MESH_PASSWORD
+    string "Mesh Password"
+    default "MESH_PASSWORD"
+    help
+        Mesh AP password. Password length must be 8 bits smaller than 64 bits,Set to null to not encrypt
 
-menu "conf of meshwifi"
+config SERVER_IP
+    string "Server IP address"
+        default "192.168.0.1"
+        help
+            Server IP address.
 
-#   choice DEVICE_TYPE
-#        bool "configure device type"
-#        default DEVICE_TYPE_NODE
-#        help
-#            configura como root o nodo
-    
- #   config DEVICE_TYPE_ROOT
- #       bool "root device"
-    
- #   config DEVICE_TYPE_NODE
- #       bool "non-root-device"
-
- #   endchoice
-        
- #   config DEVICE_TYPE
- #       int 
- #       default 1 if DEVICE_TYPE_ROOT
- #       default 2 if DEVICE_TYPE_NODE
-    
-    config MESH_ID
-        string "MESH ID"
-            default "123456"
-            help  
-                crea el mesh id
-    
-    config MESH_CHANNEL
-        int "mesh channel net"
-        range 1 14 
-        default 13
-        help    
-            mesh net channel select 
-            
-    config MESH_PASSWORD
-        string  "mesh_pwd"
-        default "1234"
-        help    
-            mesh net password select 
-
-    config SERVER_IP
-        string "Server IP address"
-            default "192.168.0.1"
-            help
-              Server IP address. 
-                         
-    config SERVER_PORT
-        int "Server port"
+config SERVER_PORT
+    int "Server port"
         default "8070"
         help
             Server port.
+# add parameters to server mqtt  
 endmenu

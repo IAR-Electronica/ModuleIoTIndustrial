@@ -31,9 +31,16 @@ echo "$command_open_idf_dev1"
 echo "$command_open_idf_dev2"
 echo "$command_open_idf_dev3"
 
+#ubuntu terminal 
+gnome-terminal --title="terminalUSB0" --geometry 70x20+0+0 -x /bin/bash  -c "$command_open_idf_dev0" & 
+gnome-terminal --title="terminalUSB1" --geometry 70x20-0+0 -x /bin/bash   -c "$command_open_idf_dev1" & 
+gnome-terminal --title="terminalUSB2" --geometry 70x20-0-0 -x /bin/bash   -c "$command_open_idf_dev2" & 
+gnome-terminal --title="terminalUSB3" --geometry 70x20-0-0 -x /bin/bash   -c "$command_open_idf_dev3" & 
 
-xfce4-terminal --title="terminalUSB0" --geometry 70x20+0+0 -x /bin/bash  -c "$command_open_idf_dev0" & 
-xfce4-terminal --title="terminalUSB1" --geometry 70x20-0+0 -x /bin/bash   -c "$command_open_idf_dev1" & 
-xfce4-terminal --title="terminalUSB2" --geometry 70x20-0-0 -x /bin/bash   -c "$command_open_idf_dev2" & 
-xfce4-terminal --title="terminalUSB3" --geometry 70x20+0-0 -x /bin/bash   -c "$command_open_idf_dev3" & 
+
+#debian terminal 
+#xfce4-terminal --title="terminalUSB0" --geometry 70x20+0+0 -x /bin/bash  -c "$command_open_idf_dev0" & 
+#xfce4-terminal --title="terminalUSB1" --geometry 70x20-0+0 -x /bin/bash   -c "$command_open_idf_dev1" & 
+#xfce4-terminal --title="terminalUSB2" --geometry 70x20-0-0 -x /bin/bash   -c "$command_open_idf_dev2" & 
+#xfce4-terminal --title="terminalUSB3" --geometry 70x20+0-0 -x /bin/bash   -c "$command_open_idf_dev3" & 
 #capture sigint and close terminals 

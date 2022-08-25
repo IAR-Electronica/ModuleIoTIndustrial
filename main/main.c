@@ -21,7 +21,7 @@
 #include "mdf_common.h"
 // #define MEMORY_DEBUG
 static esp_netif_t *netif_sta = NULL; 
-static const char *TAG = "get_started";
+static const char *TAG = "IAR MESH CUSTOM EXAMPLE";
 static int g_sockfd = -1 ;
 
 
@@ -146,51 +146,43 @@ FREE_MEM:
     vTaskDelete(NULL);
 }
 
-
-
-
-
-
-
-
-
-
 ///! tcp_client_write_task(void *arg)
 static void root_task(void *arg)
 {
-    mdf_err_t ret                    = MDF_OK;
-    char *data                       = MDF_MALLOC(MWIFI_PAYLOAD_LEN);
-    size_t size                      = MWIFI_PAYLOAD_LEN;
+     mdf_err_t ret = MDF_OK;
+    char *data    = MDF_CALLOC(1, MWIFI_PAYLOAD_LEN);
+    size_t size   = MWIFI_PAYLOAD_LEN;
     uint8_t src_addr[MWIFI_ADDR_LEN] = {0x0};
     mwifi_data_type_t data_type      = {0x0};
- 
-    MDF_LOGI("Root is running");
 
-    while (mwifi_is_connected()) 
-    {
-        if (g_sockfd == -1){
-            vTaskDelay(500/portTICK_RATE_MS) ; 
-            continue; 
+    MDF_LOGI("TCP client write task is running");
+
+    while (mwifi_is_connected()) {
+        if (g_sockfd == -1) {
+            vTaskDelay(500 / portTICK_RATE_MS);
+            continue;
         }
-        size = MWIFI_PAYLOAD_LEN;
+
+        
+        size = MWIFI_PAYLOAD_LEN - 1;
         memset(data, 0, MWIFI_PAYLOAD_LEN);
+        MDF_LOGI("--------------------MWIFI ROOT READ WAITING -------------------") ; 
         ret = mwifi_root_read(src_addr, &data_type, data, &size, portMAX_DELAY);
         MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mwifi_root_read", mdf_err_to_name(ret));
-        MDF_LOGI("Root receive, addr: " MACSTR ", size: %d, data: %s", MAC2STR(src_addr), size, data);
-        MDF_LOGD("TCP write, size: %d, data: %s", size, data) ; 
-        ret = write(g_sockfd,data,size) ; 
+
+        MDF_LOGD("TCP write, size: %d, data: %s", size, data);
+        ret = write(g_sockfd, data, size);
         MDF_ERROR_CONTINUE(ret <= 0, "<%s> TCP write", strerror(errno));
-//        size = sprintf(data, "(%d) json_data!!", i);
-//        ret = mwifi_root_write(src_addr, 1, &data_type, data, size, true);
-//        MDF_ERROR_CONTINUE(ret != MDF_OK, "mwifi_root_recv, ret: %x", ret);
-//        MDF_LOGI("Root send, addr: " MACSTR ", size: %d, data: %s", MAC2STR(src_addr), size, data);
+        MDF_LOGI("--------------------END MWIFI ROOT READ WAITING -------------------") ; 
+
     }
 
-    MDF_LOGW("Root is exit");
+    MDF_LOGI("TCP client write task is exit");
 
+    close(g_sockfd);
+    g_sockfd = -1;
     MDF_FREE(data);
-    vTaskDelete(NULL);
-}
+    vTaskDelete(NULL);}
 
 static void node_read_task(void *arg)
 {
@@ -236,7 +228,10 @@ void node_write_task(void *arg)
             continue;
         }
 
-        size = sprintf(data, "(%d) Hello root!", count++);
+        size = asprintf(&data, "{\"src_addr\": \"" MACSTR "\",\"data\": \"Hello TCP Server!\",\"count\": %d}",
+                        MAC2STR(sta_mac), count++);
+        MDF_LOGD("Node send, size: %d, data: %s", size, data);
+
         ret = mwifi_write(NULL, &data_type, data, size, true);
         MDF_ERROR_CONTINUE(ret != MDF_OK, "mwifi_write, ret: %x", ret);
 
@@ -343,7 +338,10 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             break;
         case MDF_EVENT_MWIFI_ROOT_ADDRESS:
             printf("mdf_event_root_address \r\n") ; 
-            break ; 
+        //     xTaskCreate(root_task,"rooting_task",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL ) ; 
+        //    xTaskCreate(tcp_client_read_task,"rooting_task",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL ) ; 
+        
+            break ;   
         case MDF_EVENT_MWIFI_CHILD_CONNECTED:
             MDF_LOGI("child connected event ") ; 
            // printf(" ----------------end event child ------------------\r\n ") ; 
@@ -359,7 +357,7 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
         case MDF_EVENT_MWIFI_ROOT_GOT_IP://MDF_EVENT_MWIFI_ROOT_GOT_IP
             MDF_LOGI("Root obtains the IP address. It is posted by LwIP stack automatically");
             xTaskCreate(root_task,"rooting_task",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL ) ; 
-            xTaskCreate(tcp_client_read_task,"rooting_task",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL ) ; 
+            xTaskCreate(tcp_client_read_task,"task_ejemplo",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL ) ; 
             
             break; 
         case MDF_EVENT_MWIFI_ROUTING_TABLE_ADD:
@@ -384,26 +382,16 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 }
 
 
-void vPrintMeshInfo(void *pv){
-    TickType_t ticks_delay = 4000/portTICK_RATE_MS ; 
- 
-    for(;;){
-        printf(" ------------------------------configuration of mesh wifi------------\r\n") ;         
-        printf(" ------------------------------end of mesh wifi------------\r\n") ; 
-        vTaskDelay(ticks_delay) ; 
-    }
-}
 
 void app_main()
 {
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT(); ///! configure using idf.py menuconfig
 //    mwifi_init_config_t cfg = { -.. } custom configurations 
     mwifi_config_t config ={
-        .router_ssid = "", 
-        .router_password  = "", 
-        .channel   = CONFIG_MESH_CHANNEL,
-        .mesh_id   = CONFIG_MESH_ID,
-        .mesh_password = "hola-mundo",
+        .router_ssid     = CONFIG_ROUTER_SSID,
+        .router_password = CONFIG_ROUTER_PASSWORD,
+        .mesh_id         = CONFIG_MESH_ID,
+        .mesh_password   = "hola mundo",
         /*
             !FIXED USING THIS VALUES: MESH_ROOT,MESH_IDLE ,MESH_NODE. IF USE "CONFIG_DEVICE_TYPE "
             CONFIGURE DEVICE WITH "make menuconfig" or idf.py menuconfig ! 
@@ -426,13 +414,13 @@ void app_main()
     MDF_ERROR_ASSERT(mwifi_set_config(&config));
     MDF_ERROR_ASSERT(mwifi_start());
     ///! ver que son los grupos 
-    const uint8_t group_id_list[2][6] = {{0x01, 0x00, 0x5e, 0xae, 0xae, 0xae},
+   /* const uint8_t group_id_list[2][6] = {{0x01, 0x00, 0x5e, 0xae, 0xae, 0xae},
                                         {0x01, 0x00, 0x5e, 0xae, 0xae, 0xaf}};
 
     MDF_ERROR_ASSERT(esp_mesh_set_group_id((mesh_addr_t *)group_id_list,
                                          sizeof(group_id_list) / sizeof(group_id_list[0])));
 
-
+    */  
 
     xTaskCreate(node_write_task, "node_write_task", 4 * 1024,
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
@@ -440,7 +428,8 @@ void app_main()
                     NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
    
     xTaskCreate(vTaskInfoNode,"togle_led_info", 4*4096,NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
-    TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
+    /*TimerHandle_t timer = xTimerCreate("print_system_info", 10000 / portTICK_RATE_MS,
                                         true, NULL, print_system_info_timercb);
-    xTimerStart(timer, 0);
+    xTimerStart(timer, 0);  */ 
+
 }
