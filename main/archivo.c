@@ -1,42 +1,88 @@
 #include <ADS1115.h>
 #include <stdio.h>
+//#include "main.c"
 #include "mwifi.h"
-
+#include "mdf_common.h"
 #define LEAF_LED_GPIO GPIO_NUM_22 
 #define ROOT_LED_GPIO GPIO_NUM_15 
 #define IDLE_LED_GPIO GPIO_NUM_5 
 #define NODE_LED_GPIO GPIO_NUM_21 
+#define TIME_READ_SAMPLES  (10000) 
+extern QueueHandle_t xQueueReadSensor;
+extern const char *TAG ;
+typedef struct {
+	unsigned frame_ctrl:16;
+	unsigned duration_id:16;
+	uint8_t addr1[6];   /* receiver address */
+	uint8_t addr2[6];   /* sender address */
+	uint8_t addr3[6];   /* filtering address */
+	unsigned sequence_ctrl:16;
+	uint8_t addr4[6]; /* optional */
+} wifi_ieee80211_mac_hdr_t;
+
+typedef struct {
+	wifi_ieee80211_mac_hdr_t hdr;
+	uint8_t payload[0]; /* network data ended with 4 bytes csum (CRC32) */
+} wifi_ieee80211_packet_t;
 
 
+typedef struct{
+    uint8_t id_sensor[6] ; ///ID sensor is MAC ADDRESS  
+    char data_sensor[6]  ; 
+}msg_sensor_t ; 
+SemaphoreHandle_t xMutex = NULL; 
 
 
 void vTaskGetADC(void *pv){
-    float voltage ; 
-    ///!adc_init ! 
+    msg_sensor_t data_sensor_read ; 
+    ///pointerToFunctions 
+    while (ESP_OK != esp_wifi_get_mac(WIFI_IF_STA ,data_sensor_read.id_sensor))
+    { 
+        MDF_LOGI("MDF_EVENT_FIND_NETWORK") ; 
+        vTaskDelay((500/portTICK_RATE_MS)) ; 
+    }     
+    printf("start get ADC task \r\n ") ; 
+    xQueueReadSensor = xQueueCreate( 10, sizeof(msg_sensor_t ) );
+    xMutex = xSemaphoreCreateMutex();
+    //assert(xQueueReadSensor!= NULL) ; 
+    const TickType_t time_samples = TIME_READ_SAMPLES/portTICK_RATE_MS ; 
+    uint32_t counter_send_queue_send = 0 ; 
     while(1){
-        voltage =getVoltage() ; 
-        printf("voltage: %f",voltage ) ; 
-    }
+         if (!mwifi_is_connected()) {
+            vTaskDelay(500 / portTICK_RATE_MS);
+            continue;
+        }
+        xSemaphoreTake( xMutex, portMAX_DELAY );
+        {
+            /// @brief routinge for read sensors and voltage 
+            /// @param pv 
+            data_sensor_read.data_sensor[0] = '2' ;
+            data_sensor_read.data_sensor[1] = '2' ;
+            data_sensor_read.data_sensor[2] = '.' ;
+            data_sensor_read.data_sensor[3] = '2' ;
+        }
+        xSemaphoreGive( xMutex );        ///! read sensors 
+                 
+        //taskEXIT_CRITICAL() ; 
+        ///create functions for 
+        xQueueSend(xQueueReadSensor,&data_sensor_read,(TickType_t) 0 ) ; 
+        counter_send_queue_send++ ; 
+        printf("queue send %d",counter_send_queue_send) ; 
 
-    //! tirar abajo la tarea 
+        vTaskDelay(time_samples) ; 
+    }
 }
 
 void vTaskInfoNode(void *pv){
-    // mwifi_config_t config_mesh ;
-    // CONFIGURACIÒN DE PUERTOS GPIO para realizar el prendido de leds para debugger  
-    // wifi_ap_record_t ap_data ; 
     wifi_config_t conf_wifi_ap   ; 
     wifi_config_t conf_wifi_sta  ; 
     mesh_addr_t mesh_data_table[6]  ; //= NULL ; 
-    //mesh_addr_t *nodes_table     ; // = NULL ; 
-     mwifi_data_type_t data_type = {0x0};
+   // mwifi_data_type_t data_type = {0x0};
     uint8_t mac_address_ap[6] ; 
     uint8_t mac_address_sta[6] ; 
     int  size_table_routing_main ; 
     int  size_table_routing_response;//=NULL;  
     mesh_type_t mesh_type ; 
-    //char *data    = MDF_MALLOC(MWIFI_PAYLOAD_LEN);
-
     gpio_reset_pin(LEAF_LED_GPIO) ; 
     gpio_reset_pin(ROOT_LED_GPIO) ; 
     gpio_reset_pin(IDLE_LED_GPIO) ; 
@@ -123,3 +169,48 @@ void vTaskInfoNode(void *pv){
 
 }
 
+
+const char * wifi_sniffer_packet_type2str(wifi_promiscuous_pkt_type_t type)
+{
+	switch(type) {
+	case WIFI_PKT_MGMT: return "MGMT";
+	case WIFI_PKT_DATA: return "DATA";
+	default:	
+	case WIFI_PKT_MISC: return "MISC";
+	}
+}
+
+
+
+
+
+void sniffer_for_mesh(void* buff, wifi_promiscuous_pkt_type_t type){
+ 
+	/*if (type != WIFI_PKT_MGMT)
+		return;
+    */
+	wifi_promiscuous_pkt_t *ppkt = (wifi_promiscuous_pkt_t *)buff;
+	const wifi_ieee80211_packet_t *ipkt = (wifi_ieee80211_packet_t *)ppkt->payload;
+	const wifi_ieee80211_mac_hdr_t *hdr = &ipkt->hdr;
+	printf("PACKET TYPE=%s, CHAN=%02d, RSSI=%02d,"
+		" ADDR1=%02x:%02x:%02x:%02x:%02x:%02x,"
+		" ADDR2=%02x:%02x:%02x:%02x:%02x:%02x,"
+		" ADDR3=%02x:%02x:%02x:%02x:%02x:%02x,"
+        "LENGTH: %d  ",
+		wifi_sniffer_packet_type2str(type),
+		ppkt->rx_ctrl.channel,
+		ppkt->rx_ctrl.rssi,
+		/* ADDR1 */
+		hdr->addr1[0],hdr->addr1[1],hdr->addr1[2],
+		hdr->addr1[3],hdr->addr1[4],hdr->addr1[5],
+		/* ADDR2 */
+		hdr->addr2[0],hdr->addr2[1],hdr->addr2[2],
+		hdr->addr2[3],hdr->addr2[4],hdr->addr2[5],
+		/* ADDR3 */
+		hdr->addr3[0],hdr->addr3[1],hdr->addr3[2],
+		hdr->addr3[3],hdr->addr3[4],hdr->addr3[5],
+        ppkt->rx_ctrl.sig_len 
+	);
+   
+ 
+}
