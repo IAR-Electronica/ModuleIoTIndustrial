@@ -147,10 +147,9 @@ FREE_MEM:
     vTaskDelete(NULL);
 }
 
-///! tcp_client_write_task(void *arg)
 static void root_task(void *arg)
 {
-     mdf_err_t ret = MDF_OK;
+    mdf_err_t ret = MDF_OK;
     char *data    = MDF_CALLOC(1, MWIFI_PAYLOAD_LEN);
     size_t size   = MWIFI_PAYLOAD_LEN;
     uint8_t src_addr[MWIFI_ADDR_LEN] = {0x0};
@@ -163,12 +162,9 @@ static void root_task(void *arg)
         memset(data, 0, MWIFI_PAYLOAD_LEN);
         MDF_LOGI("--------------------MWIFI ROOT READ WAITING -------------------") ; 
         ret = mwifi_root_read(src_addr, &data_type, data, &size, portMAX_DELAY);
+        printf("%s",data) ; 
+        //MDF_LOGD("root_read_data, size: %d, data: %s", size, data);
         MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mwifi_root_read", mdf_err_to_name(ret));
-
-        MDF_LOGD("root_read_data, size: %d, data: %s", size, data);
-        //  write() ; 
-        //  ret = write(g_sockfd, data, size);
-        //  MDF_ERROR_CONTINUE(ret <= 0, "<%s> TCP write", strerror(errno));
         MDF_LOGI("--------------------END MWIFI ROOT READ WAITING -------------------") ; 
 
     }
@@ -190,7 +186,7 @@ void node_write_task_sensor(void *arg)
     mdf_err_t ret = MDF_OK;
     int count     = 0;
     size_t size   = 0;
-    char *data    = MDF_MALLOC(MWIFI_PAYLOAD_LEN);
+    char *data    = NULL ; //MDF_MALLOC(MWIFI_PAYLOAD_LEN);
     mwifi_data_type_t data_type = {0x0};
     uint8_t sta_mac[MWIFI_ADDR_LEN] = {0}; 
     MDF_LOGI("Node write task is running");
@@ -205,10 +201,14 @@ void node_write_task_sensor(void *arg)
         size = asprintf(&data, "{\"src_addr\": \"" MACSTR "\",\"data\": \"%s\",\"count\": %d}",
                         MAC2STR(rx_value_from_sensor.id_sensor),rx_value_from_sensor.data_sensor ,count++);
         printf("queue received %s\r\n",rx_value_from_sensor.data_sensor) ; 
-        MDF_LOGD("Node send, size: %d, data: %s", size, data);
-        ret = mwifi_write(NULL, &data_type, data, size, true);
-        MDF_ERROR_CONTINUE(ret != MDF_OK, "mwifi_write, ret: %x", ret);
+        MDF_LOGD("Node send, size: %d, data: %s", size, data); 
+        printf("sending info data") ; 
 
+        ret = mwifi_write(NULL, &data_type, data, size, true); ///!data to send root 
+        printf("end sending info data") ; 
+
+        MDF_FREE(data);       
+        MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mwifi_write", mdf_err_to_name(ret));
     }
     MDF_LOGW("Node write task is exit");
     MDF_FREE(data);
@@ -294,7 +294,6 @@ static mdf_err_t wifi_init()
         ret = nvs_flash_init();
     }
 
-    //tcpip_adapter_init();           ///! instrucción magica ... no tocar ... sin esto no vivimos  
     MDF_ERROR_ASSERT(esp_netif_init());
     MDF_ERROR_ASSERT(ret);
     MDF_ERROR_ASSERT(esp_event_loop_create_default());
@@ -338,12 +337,13 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             MDF_LOGI("-----------------------------") ; 
             MDF_LOGI("MDF_EVENT_MWIFI_PARENT_CONNECTED");
             MDF_LOGI("-----------------------------") ; 
-
-            if (esp_mesh_is_root()) {
+            if (esp_mesh_is_root()) 
+            {
                 MDF_LOGI("SOY EL ROOT") ; 
                 esp_netif_dhcpc_start(netif_sta);
                 xTaskCreate(root_task, "root_task", 4 * 1024,
-                    NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);            }
+                    NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);            
+            }
             break;
         case MDF_EVENT_MWIFI_VOTE_STOPPED:
             MDF_LOGI("-----------------------------") ; 
@@ -437,7 +437,7 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             break ; 
         case MDF_EVENT_MWIFI_SCAN_DONE: 
             MDF_LOGI("-----------------------------") ; 
-            MDF_LOGI("MDF_EVENT_MWIFI_SCAN_DONE") ; 
+            MDF_LOGI("MDF_EVENT_MWIFI_SCAN_DONE")     ; 
             MDF_LOGI("-----------------------------") ; 
             break; 
         case MDF_EVENT_MWIFI_NETWORK_STATE: 
@@ -451,9 +451,9 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             MDF_LOGI("-----------------------------") ; 
             break ;  
         case MDF_EVENT_MWIFI_FIND_NETWORK: 
-            MDF_LOGI("-----------------------------") ; 
+            MDF_LOGI("-----------------------------"); 
             MDF_LOGI("MDF_EVENT_MWIFI_FIND_NETWORK") ; 
-            MDF_LOGI("-----------------------------") ; 
+            MDF_LOGI("-----------------------------"); 
             break ;    
         case MDF_EVENT_MWIFI_ROUTER_SWITCH: 
             MDF_LOGI("-----------------------------") ; 
@@ -467,7 +467,7 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             break ;    
         case MDF_EVENT_MWIFI_ROOT_LOST_IP: 
             MDF_LOGI("-----------------------------") ; 
-            MDF_LOGI("MDF_EVENT_MWIFI_ROOT_LOST_IP") ; 
+            MDF_LOGI("MDF_EVENT_MWIFI_ROOT_LOST_IP")  ; 
             MDF_LOGI("-----------------------------") ; 
             break ;    
          default:
@@ -481,7 +481,6 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 void app_main()
 {
     mwifi_init_config_t cfg = MWIFI_INIT_CONFIG_DEFAULT(); ///! configure using idf.py menuconfig
-//    mwifi_init_config_t cfg = { -.. } custom configurations 
     mwifi_config_t config ={
         .router_ssid     = CONFIG_ROUTER_SSID,
         .router_password = CONFIG_ROUTER_PASSWORD,
@@ -526,10 +525,11 @@ void app_main()
                   4*1024,
                   NULL , //parameters for functions
                   CONFIG_MDF_TASK_DEFAULT_PRIOTY+1,
-                  NULL) ; 
+                  NULL) ;  
+
     } 
-    
-    ///xTaskCreate(vTaskInfoNode,"togle_led_info", 4*4096,NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
+  
+   /// xTaskCreate(vTaskInfoNode,"togle_led_info", 4*4096,NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
 
 
 }
