@@ -158,13 +158,24 @@ static void root_task(void *arg)
     MDF_LOGI("task root is running ");
 
     while (mwifi_is_connected()) {
+
         size = MWIFI_PAYLOAD_LEN - 1;
         memset(data, 0, MWIFI_PAYLOAD_LEN);
+        memset(src_addr,0,6) ; //! fixme: change magic numbers 
         MDF_LOGI("--------------------MWIFI ROOT READ WAITING -------------------") ; 
         ret = mwifi_root_read(src_addr, &data_type, data, &size, portMAX_DELAY);
-        printf("%s",data) ; 
-        //MDF_LOGD("root_read_data, size: %d, data: %s", size, data);
-        MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mwifi_root_read", mdf_err_to_name(ret));
+        printf("%s\r\n",data) ; 
+        printf("received data from: ") ; 
+        printf( MACSTR,MAC2STR(src_addr)) ; 
+        MDF_LOGD("no SE CONECTO AL SERVIDOR TCP") ;    
+        if (g_sockfd == -1){ 
+            g_sockfd = socket_tcp_client_create("163.10.43.244",CONFIG_SERVER_PORT) ; 
+            if (g_sockfd!=-1){     
+                ret = write(g_sockfd,data ,size) ; 
+            }       
+        }else   ret = write(g_sockfd,data ,size) ; 
+
+        MDF_ERROR_CONTINUE(ret <= 0, "<%s> TCP write", strerror(errno)); 
         MDF_LOGI("--------------------END MWIFI ROOT READ WAITING -------------------") ; 
 
     }
@@ -469,7 +480,9 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             MDF_LOGI("-----------------------------") ; 
             MDF_LOGI("MDF_EVENT_MWIFI_ROOT_LOST_IP")  ; 
             MDF_LOGI("-----------------------------") ; 
-            break ;    
+            break ;  
+        ///add events for mqtt manage ! 
+
          default:
             break;
     }
