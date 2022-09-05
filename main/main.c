@@ -27,35 +27,6 @@ QueueHandle_t xQueueReadSensor;
 static bool isSensorNode(void) ; 
 
 
-static int socket_tcp_client_create(const char *ip, uint16_t port)
-{
-    MDF_PARAM_CHECK(ip);
-    MDF_LOGI("Create a tcp client, ip: %s, port: %d", ip, port);
-    mdf_err_t ret = ESP_OK;
-    int sockfd    = -1;
-    struct sockaddr_in server_addr = {
-        .sin_family = AF_INET,
-        .sin_port = htons(port),
-        .sin_addr.s_addr = inet_addr(ip),
-    };
-
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    MDF_ERROR_GOTO(sockfd < 0, ERR_EXIT, "socket create, sockfd: %d", sockfd);
-
-    ret = connect(sockfd, (struct sockaddr *)&server_addr, sizeof(struct sockaddr_in));
-    MDF_ERROR_GOTO(ret < 0, ERR_EXIT, "socket connect, ret: %d, ip: %s, port: %d",
-                   ret, ip, port);
-    return sockfd;
-
-ERR_EXIT:
-
-    if (sockfd != -1) {
-        close(sockfd);
-    }
-
-    return -1;
-}
-
 void tcp_client_read_task(void *arg)
 {
     mdf_err_t ret                     = MDF_OK;
