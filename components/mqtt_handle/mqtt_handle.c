@@ -386,8 +386,8 @@ mdf_err_t mesh_mqtt_start(char *url)
     MDF_ERROR_CHECK(g_mesh_mqtt.client != NULL, MDF_ERR_INVALID_STATE, "MQTT client is already running");
 
     esp_mqtt_client_config_t mqtt_cfg = {
-                .broker.address.hostname = url,
-        //.uri = url,
+//        .broker.address = "163.10.43.77", 
+        .host = "163.10.43.77",
         .event_handle = mqtt_event_handler,
         // .client_cert_pem = (const char *)client_cert_pem_start,
         // .client_key_pem = (const char *)client_key_pem_start,
@@ -406,7 +406,6 @@ mdf_err_t mesh_mqtt_stop()
 {
     MDF_ERROR_CHECK(g_mesh_mqtt.client == NULL, MDF_ERR_INVALID_STATE, "MQTT client has not been started");
     mesh_mqtt_data_t *item;
-
     if (uxQueueMessagesWaiting(g_mesh_mqtt.queue)) {
         if (xQueueReceive(g_mesh_mqtt.queue, &item, 0)) {
             MDF_FREE(item);
