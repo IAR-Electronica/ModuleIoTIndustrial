@@ -36,5 +36,12 @@ config SERVER_PORT
         default "8070"
         help
             Server port.
-# add parameters to server mqtt  
+
+config MQTT_URL
+    string "MQTT broker URL"
+        default "163.10.43.77"
+            help
+                URL of the broker to connect to 
+
+                
 endmenu
