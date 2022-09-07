@@ -30,7 +30,7 @@ static struct mesh_mqtt {
 
 static const char *TAG = "mesh_mqtt";
 
-static const char publish_topic_template[] = "mesh/%02x%02x%02x%02x%02x%02x/toCloud";
+static const char publish_topic_template[] = "iar/cooplm";
 static const char topo_topic_template[] = "mesh/%02x%02x%02x%02x%02x%02x/topo";
 static const char subscribe_topic_template[] = "mesh/%02x%02x%02x%02x%02x%02x/toDevice";
 static uint8_t mwifi_addr_any[] = MWIFI_ADDR_ANY;
@@ -288,7 +288,7 @@ mdf_err_t mesh_mqtt_update_topo()
     MDF_FREE(route_table);
     char *str = cJSON_PrintUnformatted(obj);
     MDF_ERROR_GOTO(str == NULL, _no_mem, "Print JSON failed");
-    esp_mqtt_client_publish(g_mesh_mqtt.client, g_mesh_mqtt.topo_topic, str, strlen(str), 0, 0);
+    esp_mqtt_client_publish(g_mesh_mqtt.client, g_mesh_mqtt.topo_topic, str, strlen(str), 0, 0);////qos=0
     MDF_FREE(str);
     ret = MDF_OK;
 _no_mem:
@@ -387,13 +387,13 @@ mdf_err_t mesh_mqtt_start(char *url)
 
     esp_mqtt_client_config_t mqtt_cfg = {
 //        .broker.address = "163.10.43.77", 
-        .host = "163.10.43.77",
+        .host = url,
         .event_handle = mqtt_event_handler,
         // .client_cert_pem = (const char *)client_cert_pem_start,
         // .client_key_pem = (const char *)client_key_pem_start,
     };
     MDF_ERROR_ASSERT(esp_read_mac(g_mesh_mqtt.addr, ESP_MAC_WIFI_STA));
-    snprintf(g_mesh_mqtt.publish_topic, sizeof(g_mesh_mqtt.publish_topic), publish_topic_template, MAC2STR(g_mesh_mqtt.addr));
+    snprintf(g_mesh_mqtt.publish_topic, sizeof(g_mesh_mqtt.publish_topic), publish_topic_template);
     snprintf(g_mesh_mqtt.topo_topic, sizeof(g_mesh_mqtt.topo_topic), topo_topic_template, MAC2STR(g_mesh_mqtt.addr));
     g_mesh_mqtt.queue = xQueueCreate(3, sizeof(mesh_mqtt_data_t *));
     g_mesh_mqtt.client = esp_mqtt_client_init(&mqtt_cfg);
@@ -418,6 +418,6 @@ mdf_err_t mesh_mqtt_stop()
     esp_mqtt_client_stop(g_mesh_mqtt.client);
     esp_mqtt_client_destroy(g_mesh_mqtt.client);
     g_mesh_mqtt.client = NULL;
-
+    
     return MDF_OK;
 }

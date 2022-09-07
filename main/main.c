@@ -17,9 +17,11 @@
 #include "mwifi.h"
 #include "archivo.c"
 #define MEMORY_DEBUG
-
-static const char *TAG = "mqtt_examples";
+//#define TEST_LEDS_BOARDS 
+const char *TAG = "mqtt_examples";
 esp_netif_t *sta_netif;
+bool isSensorConnect(void) ; 
+QueueHandle_t xQueueReadSensor;
 
 void root_write_task(void *arg)
 {
@@ -42,7 +44,7 @@ void root_write_task(void *arg)
          */
         ret = mwifi_root_read(src_addr, &data_type, &data, &size, portMAX_DELAY);
         MDF_ERROR_GOTO(ret != MDF_OK, MEM_FREE, "<%s> mwifi_root_read", mdf_err_to_name(ret));
-
+        printf("sending data over mqtt: %s", data) ; 
         ret = mesh_mqtt_write(src_addr, data, size, MESH_MQTT_DATA_JSON);
 
         MDF_ERROR_GOTO(ret != MDF_OK, MEM_FREE, "<%s> mesh_mqtt_publish", mdf_err_to_name(ret));
@@ -97,7 +99,7 @@ MEM_FREE:
 static void node_read_task(void *arg)
 {
     mdf_err_t ret = MDF_OK;
-    char *data = MDF_MALLOC(MWIFI_PAYLOAD_LEN);
+    char *data  = MDF_MALLOC(MWIFI_PAYLOAD_LEN);
     size_t size = MWIFI_PAYLOAD_LEN;
     mwifi_data_type_t data_type = { 0x0 };
     uint8_t src_addr[MWIFI_ADDR_LEN] = { 0x0 };
@@ -122,6 +124,7 @@ static void node_read_task(void *arg)
     vTaskDelete(NULL);
 }
 
+
 static void node_write_task(void *arg)
 {
     mdf_err_t ret = MDF_OK;
@@ -134,9 +137,10 @@ static void node_write_task(void *arg)
     MDF_LOGI("Node task is running");
 
     esp_wifi_get_mac(ESP_IF_WIFI_STA, sta_mac);
-
+    msg_sensor_t msg ; ///copy from semaphore hanlde 
     for (;;) {
         if (!mwifi_is_connected() || !mwifi_get_root_status()) {
+            MDF_LOGI("mwifi is not connected and mwifi get root status") ; 
             vTaskDelay(500 / portTICK_RATE_MS);
             continue;
         }
@@ -145,58 +149,23 @@ static void node_write_task(void *arg)
          * @brief Send device information to mqtt server throught root node.
          */
         esp_mesh_get_parent_bssid(&parent_mac);
-        size = asprintf(&data, "{\"type\":\"heartbeat\", \"self\": \"%02x%02x%02x%02x%02x%02x\", \"parent\":\"%02x%02x%02x%02x%02x%02x\",\"layer\":%d}",
-                        MAC2STR(sta_mac), MAC2STR(parent_mac.addr), esp_mesh_get_layer());
+        xQueueReceive( xQueueReadSensor,(void *) &msg , (TickType_t)portMAX_DELAY) ; 
+        size = asprintf(&data, "{\"type\":\"%s \", \"self\": \"%02x%02x%02x%02x%02x%02x\", \"parent\":\"%02x%02x%02x%02x%02x%02x\",\"layer\":%d}",
+                        msg.data_sensor,MAC2STR(sta_mac), MAC2STR(parent_mac.addr), esp_mesh_get_layer());
 
-        MDF_LOGD("Node send, size: %d, data: %s", size, data);
         ret = mwifi_write(NULL, &data_type, data, size, true);
+        printf("send %s",data) ; 
+        //MDF_LOGD("Node send, size: %d, data: %s", size, data);
         MDF_FREE(data);
         MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mwifi_write", mdf_err_to_name(ret));
-
-        vTaskDelay(3000 / portTICK_RATE_MS);
+        vTaskDelay(1000/ portTICK_RATE_MS);
     }
 
     MDF_LOGW("Node task is exit");
     vTaskDelete(NULL);
 }
 
-/**
- * @brief Timed printing system information
- */
-static void print_system_info_timercb(void *timer)
-{
-    uint8_t primary = 0;
-    wifi_second_chan_t second = 0;
-    mesh_addr_t parent_bssid = { 0 };
-    uint8_t sta_mac[MWIFI_ADDR_LEN] = { 0 };
-    wifi_sta_list_t wifi_sta_list = { 0x0 };
 
-    esp_wifi_get_mac(ESP_IF_WIFI_STA, sta_mac);
-    esp_wifi_ap_get_sta_list(&wifi_sta_list);
-    esp_wifi_get_channel(&primary, &second);
-    esp_mesh_get_parent_bssid(&parent_bssid);
-
-    MDF_LOGI("System information, channel: %d, layer: %d, self mac: " MACSTR ", parent bssid: " MACSTR
-             ", parent rssi: %d, node num: %d, free heap: %u",
-             primary,
-             esp_mesh_get_layer(), MAC2STR(sta_mac), MAC2STR(parent_bssid.addr),
-             mwifi_get_parent_rssi(), esp_mesh_get_total_node_num(), esp_get_free_heap_size());
-
-    for (int i = 0; i < wifi_sta_list.num; i++) {
-        MDF_LOGI("Child mac: " MACSTR, MAC2STR(wifi_sta_list.sta[i].mac));
-    }
-
-#ifdef MEMORY_DEBUG
-
-    if (!heap_caps_check_integrity_all(true)) {
-        MDF_LOGE("At least one heap is corrupt");
-    }
-
-    //mdf_mem_print_heap();
-    mdf_mem_print_record();
-    //mdf_mem_print_task();
-#endif /**< MEMORY_DEBUG */
-}
 
 static mdf_err_t wifi_init()
 {
@@ -240,7 +209,10 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             MDF_LOGI("MESH is started");
             break;
 
-        case MDF_EVENT_MWIFI_PARENT_CONNECTED:
+        case MDF_EVENT_MWIFI_ROOT_ADDRESS:
+            MDF_LOGI("MDF_EVENT_MWIFI_ROOT_ADDRESS") ;
+            break ; 
+        case MDF_EVENT_MWIFI_PARENT_CONNECTED://7
             MDF_LOGI("Parent is connected on station interface");
 
             if (esp_mesh_is_root()) {
@@ -249,7 +221,7 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 
             break;
 
-        case MDF_EVENT_MWIFI_PARENT_DISCONNECTED:
+        case MDF_EVENT_MWIFI_PARENT_DISCONNECTED://8
             MDF_LOGI("Parent is disconnected on station interface");
 
             if (esp_mesh_is_root()) {
@@ -274,17 +246,14 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 
         case MDF_EVENT_MWIFI_ROOT_GOT_IP: {
             MDF_LOGI("Root obtains the IP address. It is posted by LwIP stack automatically");
-
-            mesh_mqtt_start(CONFIG_MQTT_URL);
-
+            mesh_mqtt_start(CONFIG_MQTT_URL);///inicio mqtt and configuracion 
             xTaskCreate(root_write_task, "root_write", 4 * 1024,
                         NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
             xTaskCreate(root_read_task, "root_read", 4 * 1024,
                         NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
-
             break;
         }
-
+////events with usint mqtt 
         case MDF_EVENT_CUSTOM_MQTT_CONNECTED:
             MDF_LOGI("MQTT connect");
             mdf_err_t err = mesh_mqtt_subscribe();
@@ -295,7 +264,7 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             if (err != MDF_OK) {
                 MDF_LOGE("Update topo failed");
             }
-            
+            MDF_LOGI("mqtt_post_root_status") ; 
             mwifi_post_root_status(true);
             break;
 
@@ -310,6 +279,7 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 
     return MDF_OK;
 }
+
 
 void app_main()
 {
@@ -338,11 +308,43 @@ void app_main()
     MDF_ERROR_ASSERT(mwifi_start());
 
     /**
-     * @brief Create node handler
+     * @brief Safe code 
+     * 
      */
-    xTaskCreate(node_write_task, "node_write_task", 4 * 1024,
-                NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
+    if (true==isSensorConnect()){ 
+        MDF_LOGI("HAY SENSOR"); 
+        xTaskCreate(vTaskGetADC,"get_adc_task",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY+1,NULL) ; 
+        xTaskCreate(node_write_task, "node_write_task", 4 * 1024,
+                NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL) ; 
+    }
     xTaskCreate(node_read_task, "node_read_task", 4 * 1024,
                 NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
 
+#if defined TEST_LEDS_BOARDS
+   MDF_LOGI("TEST_LEDS_BOARDS"); 
+   xTaskCreate(vTaskToogleLeds, "test_toogleleds", 4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
+#else 
+   MDF_LOGI("INFO NODE CREATED "); 
+    xTaskCreate(vTaskInfoNode, "info_node_task", 4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
+#endif 
+
+
+}
+
+
+bool isSensorConnect(){
+    bool response= false  ; 
+    uint8_t gpio_level ; 
+    gpio_set_direction(GPIO_NUM_23,GPIO_MODE_INPUT) ; 
+    gpio_set_pull_mode(GPIO_NUM_23,GPIO_PULLUP_ONLY) ; 
+    gpio_level = gpio_get_level(GPIO_NUM_23) ; 
+    if (gpio_level == 1){ 
+        response = false ; 
+    }else if (gpio_level == 0){ 
+        response = true ; 
+    }
+
+    return response ; 
+
+    
 }

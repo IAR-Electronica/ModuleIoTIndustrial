@@ -2,7 +2,7 @@
 // set PGA, chanel ,
 //set chanell
 #include <stdint.h>
-
+#include <stdio.h>
 
 typedef enum {
 	FSR_6144 = 0 ,
