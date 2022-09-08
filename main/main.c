@@ -283,15 +283,15 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 
 /**
  * @brief:
- * NODO + SENSOR   -> ROOT ->  enviar_datos_sensores_router() ---> analizar el loopback  
-						   ->  leer_data_router() ///cambiar por nombre mas feliz 
-
-				    -> NODO ->  enviar_datos_sensor_root() 
-							recibir_datos_desde_fuera() 
-    NODO SIN SENSOR -> ROOT ->  enviar_datos_sensores_router()   
-	    					->	leer_data_router() ///cambiar por nombre mas feliz 
-
-    				-> NODO ->  recibir_datos_desde_fuera() 
+ * NODO + SENSOR   -> ROOT   ->  enviar_datos_sensores_router() ---> analizar el loopback  
+ *						     ->  leer_data_router() ///cambiar por nombre mas feliz 
+ *
+ *				    -> NODO  ->  enviar_datos_sensor_root() 
+ * 							 ->  recibir_datos_desde_fuera() 
+ *   NODO SIN SENSOR -> ROOT ->  enviar_datos_sensores_router()   
+ * 	    					 ->	 leer_data_router() ///cambiar por nombre mas feliz 
+ *
+ *   				-> NODO ->  recibir_datos_desde_fuera() 
  * 
  */
 
