@@ -1,16 +1,15 @@
-// Copyright 2017 Espressif Systems (Shanghai) PTE LTD
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+/**
+ * @file main.c
+ * @author IAR (www.iar.unlp.edu.ar)
+ * @brief Mesh para cooperativa aceitera la matanza y laboratorio de IoT 
+ * 
+ * 
+ * @version 0.1
+ * @date 2022-09-07
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 
 #include "mdf_common.h"
 #include "mqtt_handle.h"
@@ -280,6 +279,21 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
     return MDF_OK;
 }
 
+
+
+/**
+ * @brief:
+ * NODO + SENSOR   -> ROOT ->  enviar_datos_sensores_router() ---> analizar el loopback  
+						   ->  leer_data_router() ///cambiar por nombre mas feliz 
+
+				    -> NODO ->  enviar_datos_sensor_root() 
+							recibir_datos_desde_fuera() 
+    NODO SIN SENSOR -> ROOT ->  enviar_datos_sensores_router()   
+	    					->	leer_data_router() ///cambiar por nombre mas feliz 
+
+    				-> NODO ->  recibir_datos_desde_fuera() 
+ * 
+ */
 
 void app_main()
 {
