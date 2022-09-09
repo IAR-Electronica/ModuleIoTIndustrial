@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include "mwifi.h"
 #include "mdf_common.h"
-#define LEAF_LED_GPIO GPIO_NUM_22 /// led amarillo 
-#define ROOT_LED_GPIO GPIO_NUM_15 /// led azul 
-#define IDLE_LED_GPIO GPIO_NUM_5  /// led verde 
-#define NODE_LED_GPIO GPIO_NUM_21 /// led rojo 
+#define LEAF_LED_GPIO GPIO_NUM_22   /// led amarillo 
+#define ROOT_LED_GPIO GPIO_NUM_15   /// led azul 
+#define IDLE_LED_GPIO GPIO_NUM_5    /// led verde 
+#define NODE_LED_GPIO GPIO_NUM_21   /// led rojo 
 #define TIME_READ_SAMPLES  (10000) 
 
 extern QueueHandle_t xQueueReadSensor;
@@ -21,17 +21,17 @@ SemaphoreHandle_t xMutex = NULL;
 
 void vTaskGetADC(void *pv){
     msg_sensor_t data_sensor_read ; 
-    ADS1115_alert_comparator_t alert = { OFF,0, 0,0 };
+  /*  ADS1115_alert_comparator_t alert = { OFF,0, 0,0 };
     ADS1115_config_t ads1115 = {
                 CHANNEL_0_1,
                 FSR_6144  ,
                 CONTINIOUS_MODE,
                 SPS_8,
                 alert,
-    };  
+    };  */ 
 
-    uint8_t init_ads_check = ADS1115init(0x48, &ads1115) ;
-    MDF_LOGI("init ads check config: %d\r\n", init_ads_check) ;
+  //  uint8_t init_ads_check = ADS1115init(0x48, &ads1115) ;
+ //   MDF_LOGI("init ads check config: %d\r\n", init_ads_check) ;
 
     while (ESP_OK != esp_wifi_get_mac(WIFI_IF_STA ,data_sensor_read.id_sensor))
     { 
@@ -44,7 +44,7 @@ void vTaskGetADC(void *pv){
     //assert(xQueueReadSensor!= NULL) ; 
     const TickType_t time_samples = TIME_READ_SAMPLES/portTICK_RATE_MS ; 
     uint32_t counter_send_queue_send = 0 ; 
-    float voltage_sensor ; 
+  //  float voltage_sensor ; 
     while(1){
          if (!mwifi_is_connected()) {
             vTaskDelay(500 / portTICK_RATE_MS);
@@ -54,12 +54,12 @@ void vTaskGetADC(void *pv){
         {
             /// @brief routinge for read sensors and voltage 
             /// @param pv 
-            voltage_sensor = getVoltage() ; 
-            sprintf(data_sensor_read.data_sensor,"%.2f",voltage_sensor) ; 
-        /*    data_sensor_read.data_sensor[0] = '2' ;
+     //       voltage_sensor = getVoltage() ; 
+     //       sprintf(data_sensor_read.data_sensor,"%.2f",voltage_sensor) ; 
+            data_sensor_read.data_sensor[0] = '2' ;
             data_sensor_read.data_sensor[1] = '2' ;
             data_sensor_read.data_sensor[2] = '.' ;
-            data_sensor_read.data_sensor[3] = '2' ;*/ 
+            data_sensor_read.data_sensor[3] = '2' ; 
         }
         xSemaphoreGive( xMutex );        ///! read sensors 
                  

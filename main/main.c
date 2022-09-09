@@ -213,8 +213,10 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
             break ; 
         case MDF_EVENT_MWIFI_PARENT_CONNECTED://7
             MDF_LOGI("Parent is connected on station interface");
-
+            //soy root y tengo sensor 
+            //
             if (esp_mesh_is_root()) {
+            
                 esp_netif_dhcpc_start(sta_netif);
             }
 
@@ -285,13 +287,13 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
  * @brief:
  * NODO + SENSOR   -> ROOT   ->  enviar_datos_sensores_router() ---> analizar el loopback  
  *						     ->  leer_data_router() ///cambiar por nombre mas feliz 
- *
+ *                  
  *				    -> NODO  ->  enviar_datos_sensor_root() 
  * 							 ->  recibir_datos_desde_fuera() 
- *   NODO SIN SENSOR -> ROOT ->  enviar_datos_sensores_router()   
+ * NODO SIN SENSOR -> ROOT   ->  enviar_datos_sensores_router()   
  * 	    					 ->	 leer_data_router() ///cambiar por nombre mas feliz 
  *
- *   				-> NODO ->  recibir_datos_desde_fuera() 
+ *   				-> NODO  ->  recibir_datos_desde_fuera() 
  * 
  */
 

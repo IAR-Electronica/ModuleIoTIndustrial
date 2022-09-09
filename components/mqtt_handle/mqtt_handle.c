@@ -11,6 +11,13 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+/**
+ * {
+ *      id_sensor: "mac_addr_sta",
+ *      dato_sensor_ : (v) 
+ *      raw_data: [] (bytes )
+ * }
+ */
 
 #include "mqtt_handle.h"
 #include "cJSON.h"
