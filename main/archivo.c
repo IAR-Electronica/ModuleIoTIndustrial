@@ -41,7 +41,7 @@ void vTaskGetADC(void *pv){
     printf("start get ADC task \r\n ") ; 
     xQueueReadSensor = xQueueCreate( 10, sizeof(msg_sensor_t ) );
     xMutex = xSemaphoreCreateMutex();
-    //assert(xQueueReadSensor!= NULL) ; 
+    assert(xQueueReadSensor!= NULL) ; 
     const TickType_t time_samples = TIME_READ_SAMPLES/portTICK_RATE_MS ; 
     uint32_t counter_send_queue_send = 0 ; 
   //  float voltage_sensor ; 

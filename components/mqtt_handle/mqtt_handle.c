@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 /**
- * {
- *      id_sensor: "mac_addr_sta",
- *      dato_sensor_ : (v) 
- *      raw_data: [] (bytes )
+ * {    
+ *      id_sensor: "T1",
+ *      dato_sensor_ : (v)//I I 
+ *      raw_data: [ff22532] (bytes)
+ *      
  * }
  */
 
@@ -215,7 +216,6 @@ static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
                 MDF_FREE(item->data);
                 MDF_FREE(item);
             }
-
             break;
         }
 
