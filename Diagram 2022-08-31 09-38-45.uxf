@@ -1,1 +1,13 @@
-<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level></diagram>
+<diagram program="umletino" version="15.0.0"><zoom_level>14</zoom_level><help_text></help_text><element><id>UMLState</id><coordinates><x>98</x><y>126</y><w>224</w><h>84</h></coordinates><panel_attributes>IDLE
+--
+entry/autoselfMESH
+exit/endAutoselfMesh</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>14</x><y>364</y><w>126</w><h>56</h></coordinates><panel_attributes>MESH_START</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>602</x><y>294</y><w>210</w><h>98</h></coordinates><panel_attributes>ROOT_STATE
+--
+entry/root_read_task
+										root_write_task 
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>308</x><y>140</y><w>378</w><h>56</h></coordinates><panel_attributes>evMESH_PARENT_CONNECTED
+lt=-&gt;</panel_attributes><additional_attributes>10;20;250;20</additional_attributes></element><element><id>UMLState</id><coordinates><x>0</x><y>714</y><w>126</w><h>56</h></coordinates><panel_attributes>MESH_START</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>28</x><y>560</y><w>126</w><h>126</h></coordinates><panel_attributes>MESH_START
+--
+entry/isRoot</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLState</id><coordinates><x>14</x><y>434</y><w>126</w><h>56</h></coordinates><panel_attributes></panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>658</x><y>140</y><w>56</w><h>56</h></coordinates><panel_attributes>type=decision 
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>84</x><y>0</y><w>224</w><h>154</h></coordinates><panel_attributes>lt=-&gt;
+evMESH_STARTED</panel_attributes><additional_attributes>10;10;70;90</additional_attributes></element><element><id>Relation</id><coordinates><x>672</x><y>182</y><w>42</w><h>140</h></coordinates><panel_attributes>lt=-&gt;</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>84</x><y>0</y><w>28</w><h>28</h></coordinates><panel_attributes>type=initial</panel_attributes><additional_attributes></additional_attributes></element></diagram>

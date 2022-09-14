@@ -17,10 +17,14 @@
 #include "archivo.c"
 #define MEMORY_DEBUG
 //#define TEST_LEDS_BOARDS 
-const char *TAG = "mqtt_examples";
-esp_netif_t *sta_netif;
 bool isSensorConnect(void) ; 
+void vTaskControlLed(uint8_t level_led_board) ; 
+
 QueueHandle_t xQueueReadSensor;
+esp_netif_t *sta_netif;
+const char *TAG = "mqtt_examples";
+
+
 
 void root_write_task(void *arg)
 {
@@ -37,10 +41,12 @@ void root_write_task(void *arg)
          * @brief Recv data from node, and forward to mqtt server.
          */
         ret = mwifi_root_read(src_addr, &data_type, &data, &size, portMAX_DELAY);
+        // if src_addr == lookup table -> send mqtt, else reject message 
         MDF_ERROR_GOTO(ret != MDF_OK, MEM_FREE, "<%s> mwifi_root_read", mdf_err_to_name(ret));
         printf("sending data over mqtt: %s", data) ;     
-        if (mwifi_get_root_status()) 
+        if (true == mesh_mqtt_is_connect())   
         {
+           MDF_LOGI("MESH_MQTT_IS CONNECT") ; 
            ret = mesh_mqtt_write(src_addr, data, size, MESH_MQTT_DATA_JSON);
         }
         MDF_ERROR_GOTO(ret != MDF_OK, MEM_FREE, "<%s> mesh_mqtt_publish", mdf_err_to_name(ret));
@@ -59,7 +65,7 @@ void root_read_task(void *arg)
     mdf_err_t ret = MDF_OK;
     MDF_LOGI("Root read task is running");
     while (esp_mesh_is_root()) {
-        if (!mwifi_get_root_status()) {
+        if (!mwifi_get_root_status()) { /// receive to a connect mqtt server 
             vTaskDelay(500 / portTICK_RATE_MS);
             continue;
         }
@@ -70,11 +76,14 @@ void root_read_task(void *arg)
         /**
          * @brief Recv data from mqtt data queue, and forward to special device.
          */
+        MDF_LOGI("WAITING READ DATA ") ; 
         ret = mesh_mqtt_read(&request, pdMS_TO_TICKS(500));
 
         if (ret != MDF_OK) {
+           MDF_LOGI("RET!=MDF_OK") ;         
             continue;
         }
+        /// si reqestt ->addres_list esta en tabla de routeo -> enviarlo al correspondiente nodo 
 
         ret = mwifi_root_write(request->addrs_list, request->addrs_num, &data_type, request->data, request->size, true);
         MDF_ERROR_GOTO(ret != MDF_OK, MEM_FREE, "<%s> mwifi_root_write", mdf_err_to_name(ret));
@@ -90,14 +99,18 @@ MEM_FREE:
     vTaskDelete(NULL);
 }
 
+
+
 static void node_read_task(void *arg)
 {
+    gpio_reset_pin(GPIO_NUM_2) ; 
+    gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT) ; 
     mdf_err_t ret = MDF_OK;
     char *data  = MDF_MALLOC(MWIFI_PAYLOAD_LEN);
     size_t size = MWIFI_PAYLOAD_LEN;
     mwifi_data_type_t data_type = { 0x0 };
     uint8_t src_addr[MWIFI_ADDR_LEN] = { 0x0 };
-
+    uint8_t led_board_state = 0;
     MDF_LOGI("Node read task is running");
 
     for (;;) {
@@ -109,6 +122,8 @@ static void node_read_task(void *arg)
         size = MWIFI_PAYLOAD_LEN;
         memset(data, 0, MWIFI_PAYLOAD_LEN);
         ret = mwifi_read(src_addr, &data_type, data, &size, portMAX_DELAY);
+        led_board_state = led_board_state==1?0:1 ; 
+        vTaskControlLed(led_board_state) ; 
         MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mwifi_read", mdf_err_to_name(ret));
         MDF_LOGI("Node receive: " MACSTR ", size: %d, data: %s", MAC2STR(src_addr), size, data);
     }
@@ -118,7 +133,11 @@ static void node_read_task(void *arg)
     vTaskDelete(NULL);
 }
 
-
+/**
+ * @brief 
+ * 
+ * @param arg 
+ */
 static void node_write_task(void *arg)
 {
     mdf_err_t ret = MDF_OK;
@@ -133,23 +152,17 @@ static void node_write_task(void *arg)
     esp_wifi_get_mac(ESP_IF_WIFI_STA, sta_mac);
     msg_sensor_t msg ; ///copy from semaphore hanlde 
     for (;;) {
-
         /**
          * @brief Send device information to mqtt server throught root node.
          */
-        if (esp_mesh_is_root()==false){
-            esp_mesh_get_parent_bssid(&parent_mac);
-
-        }else { 
-            esp_wifi_get_mac(WIFI_IF_AP,sta_mac) ; 
-        }
-        xQueueReceive( xQueueReadSensor,(void *) &msg , (TickType_t)portMAX_DELAY) ; 
-        size = asprintf(&data, "{\"type\":\"%s \", \"self\": \"%02x%02x%02x%02x%02x%02x\", \"parent\":\"%02x%02x%02x%02x%02x%02x\",\"layer\":%d}",
-                        msg.data_sensor,MAC2STR(sta_mac), MAC2STR(parent_mac.addr), esp_mesh_get_layer());
-        //if mwifi_is_connected || !mwifi_get_root_status()
+        
+        
+        xQueueReceive(xQueueReadSensor,(void *) &msg , (TickType_t)portMAX_DELAY) ; 
+        size = asprintf(&data, "{\"voltage\":\"%s \", \"self\": \"%02x%02x%02x%02x%02x%02x\", \"parent\":\"%02x%02x%02x%02x%02x%02x\",\"layer\":%d}",
+                        msg.data_sensor,MAC2STR(sta_mac), MAC2STR(msg.id_sensor), esp_mesh_get_layer());
         if (mwifi_is_connected() ) {
-            MDF_LOGI("mwifi is not connected and mwifi get root status") ; 
-            ret = mwifi_write(NULL, &data_type, data, size, true);
+            MDF_LOGI("mwifi is connected and send info to root ") ; 
+            ret = mwifi_write(NULL, &data_type, data, size, true); /// send data to root 
         }         
         printf("send %s",data) ; 
         //MDF_LOGD("Node send, size: %d, data: %s", size, data);
@@ -209,11 +222,14 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
         case MDF_EVENT_MWIFI_ROOT_ADDRESS:
             MDF_LOGI("MDF_EVENT_MWIFI_ROOT_ADDRESS") ;
             break ; 
+        case MDF_EVENT_MWIFI_FIND_NETWORK: //22 ?? MDF_EVENT_MWIFI_FIND_NETWORK
+            MDF_LOGI("MDF_EVENT_MWIFI_FIND_NETWORK") ;
+            break ; 
         case MDF_EVENT_MWIFI_TODS_STATE:
             MDF_LOGI("MDF_EVENT_MWIFI_TODS_STATE")   ;
             break ; 
         case MDF_EVENT_MWIFI_PARENT_CONNECTED:  //7
-            MDF_LOGI("Parent is connected on station interface");
+            MDF_LOGI("MDF_EVENT_MWIFI_PARENT_CONNECTED");
             if (esp_mesh_is_root()) 
             {
                 esp_netif_dhcpc_start(sta_netif); /// conexion con server dhcp 
@@ -266,12 +282,12 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
                 MDF_LOGE("Update topo failed");
             }
             MDF_LOGI("mqtt_post_root_status") ; 
-            mwifi_post_root_status(true);
+            mwifi_post_root_status(true);  ///aviso a la todos los nodos que la red mqtt esta funcionando
             break;
 
         case MDF_EVENT_CUSTOM_MQTT_DISCONNECTED:
             MDF_LOGI("MQTT disconnected");
-            mwifi_post_root_status(false);
+            mwifi_post_root_status(false); ///aviso a la todos los nodos que la red mqtt no esta funcionando
             break;
 
         default:
@@ -285,15 +301,6 @@ static mdf_err_t event_loop_cb(mdf_event_loop_t event, void *ctx)
 
 /**
  * @brief:
- * NODO + SENSOR   -> ROOT   ->  enviar_datos_sensores_router() ---> analizar el loopback  
- *						     ->  leer_data_router() ///cambiar por nombre mas feliz 
- *                  
- *				    -> NODO  ->  enviar_datos_sensor_root() 
- * 							 ->  recibir_datos_desde_fuera() 
- * NODO SIN SENSOR -> ROOT   ->  enviar_datos_sensores_router()   
- * 	    					 ->	 leer_data_router() ///cambiar por nombre mas feliz 
- *
- *   				-> NODO  ->  recibir_datos_desde_fuera() 
  * 
  */
 
@@ -327,15 +334,12 @@ void app_main()
      * @brief Safe code 
      * 
      */
-    gpio_reset_pin(GPIO_NUM_2) ; 
-    gpio_set_direction(GPIO_NUM_2, GPIO_MODE_OUTPUT) ; 
-    gpio_set_level(GPIO_NUM_2,0) ; 
+  
     if (true==isSensorConnect()){ 
         MDF_LOGI("HAY SENSOR"); 
         xTaskCreate(vTaskGetADC,"get_adc_task",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY+1,NULL) ; 
         xTaskCreate(node_write_task, "node_write_task", 4 * 1024,
                 NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL) ; 
-        gpio_set_level(GPIO_NUM_2,1) ; 
     }
     xTaskCreate(node_read_task, "node_read_task", 4 * 1024,
                 NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
@@ -348,18 +352,14 @@ void app_main()
     xTaskCreate(vTaskInfoNode, "info_node_task", 4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
 #endif 
     
-    
-//    gpio_set_direction(GPIO_NUM_2,GPIO_MODE_OUTPUT) ; 
-//    gpio_set_level(GPIO_NUM_2,1) ; 
 
 }
 
 
 void vTaskControlLed(uint8_t level_led_board){ 
-////    gpio_reset_pin(GPIO_NUM_2) ; 
-////    gpio_set_direction(GPIO_NUM_2,GPIO_MODE_OUTPUT) ; 
-////    gpio_set_level(GPIO_NUM_2,1) ; 
-    ////! if rx_message_node -> toogle led board ! ;next:Generation -> use display port 
+// BOARD LED BLUE 
+   
+    gpio_set_level(GPIO_NUM_2,level_led_board) ; 
     
 }
 

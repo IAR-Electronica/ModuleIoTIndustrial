@@ -203,7 +203,7 @@ static esp_err_t mqtt_event_handler(esp_mqtt_event_handle_t event)
         case MQTT_EVENT_DATA: {
             MDF_LOGD("MQTT_EVENT_DATA, topic: %.*s, data: %.*s",
                      event->topic_len, event->topic, event->data_len, event->data);
-
+            MDF_LOGI("EVENT_DATA: %s", event->data) ; 
             mesh_mqtt_data_t *item = mesh_mqtt_parse_data(event->topic, event->topic_len, event->data, event->data_len);
 
             if (item == NULL) {
@@ -411,6 +411,7 @@ mdf_err_t mesh_mqtt_start(char *url)
 
 mdf_err_t mesh_mqtt_stop()
 {
+
     MDF_ERROR_CHECK(g_mesh_mqtt.client == NULL, MDF_ERR_INVALID_STATE, "MQTT client has not been started");
     mesh_mqtt_data_t *item;
     if (uxQueueMessagesWaiting(g_mesh_mqtt.queue)) {
@@ -427,4 +428,5 @@ mdf_err_t mesh_mqtt_stop()
     g_mesh_mqtt.client = NULL;
     
     return MDF_OK;
+
 }

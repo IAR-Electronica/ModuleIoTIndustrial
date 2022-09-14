@@ -6,7 +6,8 @@
 #define ROOT_LED_GPIO GPIO_NUM_15   /// led azul 
 #define IDLE_LED_GPIO GPIO_NUM_5    /// led verde 
 #define NODE_LED_GPIO GPIO_NUM_21   /// led rojo 
-#define TIME_READ_SAMPLES  (10000) 
+#define TIME_READ_SAMPLES  (10000)  ///10 seconds, time in ms 
+#define I2C_ADDRESS_SENSOR 0x48     /// i2c address_sensor 
 
 extern QueueHandle_t xQueueReadSensor;
 
@@ -35,13 +36,13 @@ void vTaskGetADC(void *pv){
 
     while (ESP_OK != esp_wifi_get_mac(WIFI_IF_STA ,data_sensor_read.id_sensor))
     { 
-        MDF_LOGI(" WAIT GET MAC ADDRESS")  ; 
-        vTaskDelay((500/portTICK_RATE_MS)) ; 
+        MDF_LOGI("WAIT GET MAC ADDRESS")  ; 
+        vTaskDelay((1000/portTICK_RATE_MS)) ; 
     }     
     printf("start get ADC task \r\n ") ; 
     xQueueReadSensor = xQueueCreate( 10, sizeof(msg_sensor_t ) );
     xMutex = xSemaphoreCreateMutex();
-    assert(xQueueReadSensor!= NULL) ; 
+    //assert(xQueueReadSensor!= NULL) ; 
     const TickType_t time_samples = TIME_READ_SAMPLES/portTICK_RATE_MS ; 
     uint32_t counter_send_queue_send = 0 ; 
   //  float voltage_sensor ; 
@@ -54,8 +55,8 @@ void vTaskGetADC(void *pv){
         {
             /// @brief routinge for read sensors and voltage 
             /// @param pv 
-     //       voltage_sensor = getVoltage() ; 
-     //       sprintf(data_sensor_read.data_sensor,"%.2f",voltage_sensor) ; 
+     //     voltage_sensor = getVoltage() ; 
+     //     sprintf(data_sensor_read.data_sensor,"%.2f",voltage_sensor) ; 
             data_sensor_read.data_sensor[0] = '2' ;
             data_sensor_read.data_sensor[1] = '2' ;
             data_sensor_read.data_sensor[2] = '.' ;
