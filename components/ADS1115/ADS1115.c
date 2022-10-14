@@ -40,7 +40,6 @@ typedef struct {
 	uint8_t PGA  : 3 ;
 	uint8_t MUX  : 3 ;
 	uint8_t OS   : 1 ;
-
 	uint8_t COMP_QUE : 2 ;
 	uint8_t COMP_LAT : 1 ;
 	uint8_t COMP_POL : 1 ;
@@ -64,9 +63,9 @@ static ads111x_handle_t ADS1115 ;
  * @param i2c_address: 8 bytes para el dispositivo, añadiendole un 0 delante de la direcciòn
  * @param ads1115Config estructura de configuración definida por el usuario
  * @return ERROR: 0X01 -> OK
- * 				  OXO2 ->WRITE_OK
- * 				  0X03 ->READ_OK
- * 				  OXO4 WRITE_ERROR
+ * 				  OXO2 -> WRITE_OK
+ * 				  0X03 -> READ_OK
+ * 				  OXO4 -> WRITE_ERROR
  *
  */
 uint8_t ADS1115init(uint8_t i2c_address, ADS1115_config_t *ads1115Config){
@@ -96,30 +95,32 @@ uint8_t ADS1115init(uint8_t i2c_address, ADS1115_config_t *ads1115Config){
 	setMode(ADS1115.user_config.mode_measurement);
 	setSPS(ADS1115.user_config.setSPS) ;
 	alertDRYport(ADS1115.user_config.alert_mode) ;
-	memcpy(&config_user[1],(uint8_t *)&ADS1115.config_register ,2) ;//destino, fuente, tamaño
-	// Escritura de la configuraciòn del usuario
+	memcpy(&config_user[1],(uint8_t *)&ADS1115.config_register ,2) ;	
 
-	error_code_init = I2CWriteToSlave(ADS1115.I2C_address,config_user,3) ; //escribir registro de configuración
+	error_code_init = I2CWriteToSlave(ADS1115.I2C_address,config_user,3) ; 		  //escribir registro de configuración
 	errorI2CWrite(&error_code_init) ;
 
 	if (error_code_init != ERROR_INIT_ADS1115_WRITE_OK) {
 			return error_code_init ;
 	}
+	
 	error_code_init =I2CWriteToSlave(ADS1115.I2C_address, &address_pointer, 1 ) ; //register pointer address en 0x01
-	errorI2CRead(&error_code_init) ;
+	errorI2CWrite(&error_code_init) ;
 	if (error_code_init != ERROR_INIT_ADS1115_READ_OK) {
 			return error_code_init ;
 	}
 	// check de configuración de los parametros
 
 	error_code_init = I2CReadToSlave(ADS1115.I2C_address, read_config_check ,2 ) 	   ;
+	errorI2CRead(&error_code_init) ; 
 	if (error_code_init != ERROR_INIT_ADS1115_READ_OK) {
 		return error_code_init ;
 	}
 
 	//// CHECKING DE LA CONFIGURACION DE USUARIO
+	//read_config_check[1] |= 0x80;
 	if (read_config_check[0] == config_user[1] ){
-		if (read_config_check[1] ==config_user[2]) {
+		if (read_config_check[1] == config_user[2]) {
 			error_code_init = ERROR_INIT_ADS1115_OK ;
 		}
 	}else{
@@ -212,43 +213,36 @@ static void alertDRYport(ADS1115_alert_comparator_t alert_user){
 }
 
 
-/// falta controlar los errores en caso que existan en los puertos
-/// I2C.
-/// La función lee el valor del adc y lo transforma en un valor de tension en
-/// volts
-float getVoltage(){
+
+float getVoltage(uint8_t *raw_addres, uint8_t *error_code_i2c){
 		uint8_t address_pointer  ;
 		uint8_t raw_data[3] = {0x01,0,0} ;
 		uint8_t read_data[2] ;
 		int16_t voltage ; // voltage in mv
 		float volt = 0 ;
 		if (ADS1115.user_config.mode_measurement == CONTINIOUS_MODE){
+			address_pointer =0x00 ; 
 			I2CWriteToSlave(ADS1115.I2C_address,&address_pointer,1)        ;
 		}else if (ADS1115.user_config.mode_measurement == SINGLE_SHOT_MODE){
 			address_pointer = ADDRESS_POINTER_REG_CONFIG_REGISTER ;
 			ADS1115.config_register.OS = 1 ;
 			raw_data[0] = address_pointer  ;
 			memcpy(&raw_data[1],(uint8_t *)&ADS1115.config_register ,sizeof(ADS1115.config_register)) ;//destino, fuente, tamaño
-			//printf("write_to_slave_get_float: %02x %02x %02x  \r\n", raw_data[0],raw_data[1],raw_data[2]) ;
 			I2CWriteToSlave(ADS1115.I2C_address ,raw_data , 3) ;
 			ADS1115.config_register.OS = 0 ;
 			address_pointer = ADDRESS_POINTER_REG_CONVERSION_REGISTER ;
 			I2CWriteToSlave(ADS1115.I2C_address,&address_pointer,1) ;
 		}
-		I2CReadToSlave(ADS1115.I2C_address, read_data,2) ;
+		*error_code_i2c = I2CReadToSlave(ADS1115.I2C_address, read_data,2) ;
 		uint8_t aux = read_data[0] ;
 		read_data[0] = read_data[1] ;
 		read_data[1] = aux ;
 		// convert to voltage
+		memcpy(raw_addres,read_data,2); 
 		memcpy (&voltage,read_data,sizeof(int16_t) ) ;
-		//printf("read_data: %02x %02x", read_data[0],read_data[1]) ;
-		voltage = voltage >>4 ;
+		voltage = voltage>>4 ;
 		volt = (voltage) * factor_conv_ad ;
 		return volt ;
-
-
-
-
 
 }
 

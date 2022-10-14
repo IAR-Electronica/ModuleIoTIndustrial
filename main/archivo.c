@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include "mwifi.h"
 #include "mdf_common.h"
-#define LEAF_LED_GPIO GPIO_NUM_22   /// led amarillo 
+#define LEAF_LED_GPIO GPIO_NUM_23   /// led amarillo 
 #define ROOT_LED_GPIO GPIO_NUM_15   /// led azul 
 #define IDLE_LED_GPIO GPIO_NUM_5    /// led verde 
-#define NODE_LED_GPIO GPIO_NUM_21   /// led rojo 
+#define NODE_LED_GPIO GPIO_NUM_19   /// led rojo 
 #define TIME_READ_SAMPLES  (10000)  ///10 seconds, time in ms 
 #define I2C_ADDRESS_SENSOR 0x48     /// i2c address_sensor 
 
@@ -14,38 +14,40 @@ extern QueueHandle_t xQueueReadSensor;
 extern const char *TAG ;
 
 typedef struct{
-    uint8_t id_sensor[6] ; ///ID sensor is MAC ADDRESS  
-    char data_sensor[6]  ; 
+    uint8_t mac_address[6] ; ///ID sensor is MAC ADDRESS  
+    uint8_t status ; 
+    uint8_t raw_data[2] ; 
+    int16_t decimal_conv ; 
+    float tension; 
 }msg_sensor_t ; 
+
+
 SemaphoreHandle_t xMutex = NULL; 
 
 
 void vTaskGetADC(void *pv){
     msg_sensor_t data_sensor_read ; 
-  /*  ADS1115_alert_comparator_t alert = { OFF,0, 0,0 };
+    ADS1115_alert_comparator_t alert = { OFF,0, 0,0 };
     ADS1115_config_t ads1115 = {
-                CHANNEL_0_1,
+                CHANNEL_0_GND,
                 FSR_6144  ,
                 CONTINIOUS_MODE,
                 SPS_8,
                 alert,
-    };  */ 
+    };   
 
-  //  uint8_t init_ads_check = ADS1115init(0x48, &ads1115) ;
- //   MDF_LOGI("init ads check config: %d\r\n", init_ads_check) ;
-
-    while (ESP_OK != esp_wifi_get_mac(WIFI_IF_STA ,data_sensor_read.id_sensor))
-    { 
+   uint8_t init_ads_check = ADS1115init(0x48, &ads1115) ;
+   MDF_LOGI("init ads check config: %d\r\n", init_ads_check) ;
+   float voltage_sensor ; 
+   while (ESP_OK != esp_wifi_get_mac(WIFI_IF_STA ,data_sensor_read.mac_address))
+   { 
         MDF_LOGI("WAIT GET MAC ADDRESS")  ; 
         vTaskDelay((1000/portTICK_RATE_MS)) ; 
     }     
     printf("start get ADC task \r\n ") ; 
-    xQueueReadSensor = xQueueCreate( 10, sizeof(msg_sensor_t ) );
     xMutex = xSemaphoreCreateMutex();
-    //assert(xQueueReadSensor!= NULL) ; 
     const TickType_t time_samples = TIME_READ_SAMPLES/portTICK_RATE_MS ; 
     uint32_t counter_send_queue_send = 0 ; 
-  //  float voltage_sensor ; 
     while(1){
          if (!mwifi_is_connected()) {
             vTaskDelay(500 / portTICK_RATE_MS);
@@ -55,14 +57,15 @@ void vTaskGetADC(void *pv){
         {
             /// @brief routinge for read sensors and voltage 
             /// @param pv 
-     //     voltage_sensor = getVoltage() ; 
-     //     sprintf(data_sensor_read.data_sensor,"%.2f",voltage_sensor) ; 
-            data_sensor_read.data_sensor[0] = '2' ;
-            data_sensor_read.data_sensor[1] = '2' ;
-            data_sensor_read.data_sensor[2] = '.' ;
-            data_sensor_read.data_sensor[3] = '2' ; 
+            if (data_sensor_read.status == 0xFF){
+                init_ads_check = ADS1115init(0x48, &ads1115) ;
+                MDF_LOGI("RECONFIGURACION DE DISPOSITIVO: %d",init_ads_check) ;
+            }
+            voltage_sensor = getVoltage(data_sensor_read.raw_data,&data_sensor_read.status ) ; 
+            data_sensor_read.tension = voltage_sensor ; 
+            memcpy(&data_sensor_read.decimal_conv ,data_sensor_read.raw_data,2) ; 
         }
-        xSemaphoreGive( xMutex );        ///! read sensors 
+        xSemaphoreGive(xMutex);        ///! read sensors 
                  
         //taskEXIT_CRITICAL() ; 
         ///create functions for 
@@ -70,7 +73,7 @@ void vTaskGetADC(void *pv){
         counter_send_queue_send++ ; 
         printf("queue send %d",counter_send_queue_send) ; 
 
-        vTaskDelay(time_samples) ; 
+        vTaskDelay(time_samples) ;  
     }
 }
 
@@ -147,14 +150,14 @@ void vTaskInfoNode(void *pv){
                 gpio_set_level(NODE_LED_GPIO,0) ;
                 break ; 
             default: 
-                //// by default all leds off using board mesh 
-                gpio_set_level(LEAF_LED_GPIO,0) ;
-                gpio_set_level(ROOT_LED_GPIO,0) ;
-                gpio_set_level(IDLE_LED_GPIO,0) ;
-                gpio_set_level(NODE_LED_GPIO,0) ; 
-                break ;  
+               //// by default all leds off using board mesh 
+               gpio_set_level(LEAF_LED_GPIO,0) ;
+               gpio_set_level(ROOT_LED_GPIO,0) ;
+               gpio_set_level(IDLE_LED_GPIO,0) ;
+               gpio_set_level(NODE_LED_GPIO,0) ; 
+               break ;  
         }
-        vTaskDelay((TickType_t ) 1000/portTICK_RATE_MS) ; 
+        vTaskDelay((TickType_t ) 5000/portTICK_RATE_MS) ; 
     }
 
 }
@@ -185,7 +188,6 @@ void vTaskToogleLeds(void *arg){
         gpio_set_level(IDLE_LED_GPIO,0) ;
         gpio_set_level(NODE_LED_GPIO,0) ;
         vTaskDelay(1000/portTICK_RATE_MS) ; 
-    
     }
 
 }

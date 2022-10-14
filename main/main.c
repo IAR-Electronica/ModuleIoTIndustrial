@@ -16,6 +16,7 @@
 #include "mwifi.h"
 #include "archivo.c"
 #define MEMORY_DEBUG
+#define PORT_JUMPER GPIO_NUM_32 
 //#define TEST_LEDS_BOARDS 
 bool isSensorConnect(void) ; 
 void vTaskControlLed(uint8_t level_led_board) ; 
@@ -36,7 +37,7 @@ void root_write_task(void *arg)
 
     MDF_LOGI("Root write task is running");
 
-    while (esp_mesh_is_root()) {
+    while (esp_mesh_is_root()){
         /**
          * @brief Recv data from node, and forward to mqtt server.
          */
@@ -50,7 +51,6 @@ void root_write_task(void *arg)
            ret = mesh_mqtt_write(src_addr, data, size, MESH_MQTT_DATA_JSON);
         }
         MDF_ERROR_GOTO(ret != MDF_OK, MEM_FREE, "<%s> mesh_mqtt_publish", mdf_err_to_name(ret));
-
 MEM_FREE:
         MDF_FREE(data);
     }
@@ -80,8 +80,7 @@ void root_read_task(void *arg)
         ret = mesh_mqtt_read(&request, pdMS_TO_TICKS(500));
 
         if (ret != MDF_OK) {
-           MDF_LOGI("RET!=MDF_OK") ;         
-            continue;
+           continue;
         }
         /// si reqestt ->addres_list esta en tabla de routeo -> enviarlo al correspondiente nodo 
 
@@ -154,21 +153,18 @@ static void node_write_task(void *arg)
     for (;;) {
         /**
          * @brief Send device information to mqtt server throught root node.
-         */
-        
-        
-        xQueueReceive(xQueueReadSensor,(void *) &msg , (TickType_t)portMAX_DELAY) ; 
-        size = asprintf(&data, "{\"voltage\":\"%s \", \"self\": \"%02x%02x%02x%02x%02x%02x\", \"parent\":\"%02x%02x%02x%02x%02x%02x\",\"layer\":%d}",
-                        msg.data_sensor,MAC2STR(sta_mac), MAC2STR(msg.id_sensor), esp_mesh_get_layer());
+        */
+        xQueueReceive(xQueueReadSensor,(void *) &msg , (TickType_t) portMAX_DELAY) ; 
+        size = asprintf(&data, "{\"tension\":\"%f\", \"bytes_adc\":\"%02x%02x\", \"decimal\":\"%d\",\"status\":%d}",
+                        msg.tension,msg.raw_data[1],msg.raw_data[0],msg.decimal_conv,msg.status );
         if (mwifi_is_connected() ) {
-            MDF_LOGI("mwifi is connected and send info to root ") ; 
+            MDF_LOGI("mwifi is connected and send info to root") ; 
             ret = mwifi_write(NULL, &data_type, data, size, true); /// send data to root 
         }         
         printf("send %s",data) ; 
         //MDF_LOGD("Node send, size: %d, data: %s", size, data);
         MDF_FREE(data);
         MDF_ERROR_CONTINUE(ret != MDF_OK, "<%s> mwifi_write", mdf_err_to_name(ret));
-        vTaskDelay(1000/ portTICK_RATE_MS); ///sending_data using clear
     }
 
     MDF_LOGW("Node task is exit");
@@ -188,7 +184,6 @@ static mdf_err_t wifi_init()
     }
 
     MDF_ERROR_ASSERT(ret);
-
     MDF_ERROR_ASSERT(esp_netif_init());
     MDF_ERROR_ASSERT(esp_event_loop_create_default());
     ESP_ERROR_CHECK(esp_netif_create_default_wifi_mesh_netifs(&sta_netif, NULL));
@@ -198,7 +193,6 @@ static mdf_err_t wifi_init()
     MDF_ERROR_ASSERT(esp_wifi_set_ps(WIFI_PS_NONE));
     MDF_ERROR_ASSERT(esp_mesh_set_6m_rate(false));
     MDF_ERROR_ASSERT(esp_wifi_start());
-
     return MDF_OK;
 }
 
@@ -314,13 +308,14 @@ void app_main()
         .mesh_password = "hola-mundo",
     };
 
+    // 
     /**
      * @brief Set the log level for serial port printing.
      */
     ///!esp_log_level_set("*", ESP_LOG_INFO);
     ///!esp_log_level_set(TAG, ESP_LOG_DEBUG);
     ///!esp_log_level_set("mesh_mqtt", ESP_LOG_DEBUG);
-
+//    xTaskCreate(testADCtask,"get_adc_task",6*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY+1,NULL) ; 
     /**
      * @brief Initialize wifi mesh.
      */
@@ -334,10 +329,11 @@ void app_main()
      * @brief Safe code 
      * 
      */
-  
+    
     if (true==isSensorConnect()){ 
         MDF_LOGI("HAY SENSOR"); 
-        xTaskCreate(vTaskGetADC,"get_adc_task",4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY+1,NULL) ; 
+        xQueueReadSensor = xQueueCreate( 10, sizeof(msg_sensor_t ) );
+        xTaskCreate(vTaskGetADC,"get_adc_task",6*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY+1,NULL) ; 
         xTaskCreate(node_write_task, "node_write_task", 4 * 1024,
                 NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL) ; 
     }
@@ -345,8 +341,8 @@ void app_main()
                 NULL, CONFIG_MDF_TASK_DEFAULT_PRIOTY, NULL);
 
 #if defined TEST_LEDS_BOARDS
-   MDF_LOGI("TEST_LEDS_BOARDS"); 
-   xTaskCreate(vTaskToogleLeds, "test_toogle_leds", 4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
+//   MDF_LOGI("TEST_LEDS_BOARDS"); 
+//   xTaskCreate(vTaskToogleLeds, "test_toogle_leds", 4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
 #else 
     MDF_LOGI("INFO NODE CREATED "); 
     xTaskCreate(vTaskInfoNode, "info_node_task", 4*1024,NULL,CONFIG_MDF_TASK_DEFAULT_PRIOTY,NULL) ; 
@@ -368,15 +364,15 @@ void vTaskControlLed(uint8_t level_led_board){
 bool isSensorConnect(){
     bool response= false  ; 
     uint8_t gpio_level ; 
-    gpio_set_direction(GPIO_NUM_23,GPIO_MODE_INPUT) ; 
-    gpio_set_pull_mode(GPIO_NUM_23,GPIO_PULLUP_ONLY) ; 
-    gpio_level = gpio_get_level(GPIO_NUM_23) ; 
+    gpio_set_direction(PORT_JUMPER,GPIO_MODE_INPUT) ; 
+    gpio_set_pull_mode(PORT_JUMPER,GPIO_PULLUP_ONLY) ; 
+    gpio_level = gpio_get_level(PORT_JUMPER) ; 
     if (gpio_level == 1){ 
         response = false ; 
     }else if (gpio_level == 0){ 
         response = true ; 
     }
-
+    gpio_reset_pin(PORT_JUMPER) ; 
     return response ; 
 
     
