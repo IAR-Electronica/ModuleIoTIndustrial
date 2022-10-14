@@ -27,6 +27,7 @@ SemaphoreHandle_t xMutex = NULL;
 
 void vTaskGetADC(void *pv){
     msg_sensor_t data_sensor_read ; 
+    bool sensor_is_connected = false ; 
     ADS1115_alert_comparator_t alert = { OFF,0, 0,0 };
     ADS1115_config_t ads1115 = {
                 CHANNEL_0_GND,
@@ -38,6 +39,9 @@ void vTaskGetADC(void *pv){
 
    uint8_t init_ads_check = ADS1115init(0x48, &ads1115) ;
    MDF_LOGI("init ads check config: %d\r\n", init_ads_check) ;
+   if (init_ads_check == 0x02) { 
+    sensor_is_connected = true ; 
+   }
    float voltage_sensor ; 
    while (ESP_OK != esp_wifi_get_mac(WIFI_IF_STA ,data_sensor_read.mac_address))
    { 
@@ -57,9 +61,10 @@ void vTaskGetADC(void *pv){
         {
             /// @brief routinge for read sensors and voltage 
             /// @param pv 
-            if (data_sensor_read.status == 0xFF){
+            if (data_sensor_read.status == 0xFF || sensor_is_connected == false ){
                 init_ads_check = ADS1115init(0x48, &ads1115) ;
                 MDF_LOGI("RECONFIGURACION DE DISPOSITIVO: %d",init_ads_check) ;
+                sensor_is_connected = (init_ads_check == 0x02)?true:false ; 
             }
             voltage_sensor = getVoltage(data_sensor_read.raw_data,&data_sensor_read.status ) ; 
             data_sensor_read.tension = voltage_sensor ; 
