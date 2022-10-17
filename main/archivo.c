@@ -65,9 +65,12 @@ void vTaskGetADC(void *pv){
                 init_ads_check = ADS1115init(0x48, &ads1115) ;
                 MDF_LOGI("RECONFIGURACION DE DISPOSITIVO: %d",init_ads_check) ;
                 sensor_is_connected = (init_ads_check == 0x02)?true:false ; 
+
             }
             voltage_sensor = getVoltage(data_sensor_read.raw_data,&data_sensor_read.status ) ; 
             data_sensor_read.tension = voltage_sensor ; 
+            MDF_LOGI("DATOS-SENSOR: VOLTAGE %f ; bytes_adc: %02x %02x , status: %d",   
+                data_sensor_read.tension,data_sensor_read.raw_data[0],data_sensor_read.raw_data[1],data_sensor_read.status) ; 
             memcpy(&data_sensor_read.decimal_conv ,data_sensor_read.raw_data,2) ; 
         }
         xSemaphoreGive(xMutex);        ///! read sensors 
