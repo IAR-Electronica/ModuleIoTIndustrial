@@ -145,18 +145,18 @@ static void node_write_task(void *arg)
     mwifi_data_type_t data_type = { 0x0 };
     uint8_t sta_mac[MWIFI_ADDR_LEN] = { 0 };
     mesh_addr_t parent_mac = { 0 };
-
     MDF_LOGI("Node task is running");
-
     esp_wifi_get_mac(ESP_IF_WIFI_STA, sta_mac);
     msg_sensor_t msg ; ///copy from semaphore hanlde 
+
     for (;;) {
         /**
          * @brief Send device information to mqtt server throught root node.
         */
         xQueueReceive(xQueueReadSensor,(void *) &msg , (TickType_t) portMAX_DELAY) ; 
-        size = asprintf(&data, "{\"tension\":\"%f\", \"bytes_adc\":\"%02x%02x\", \"decimal\":\"%d\",\"status\":%d}",
-                        msg.tension,msg.raw_data[1],msg.raw_data[0],msg.decimal_conv,msg.status );
+        size = asprintf(&data, "{\"tension\":\"%f\", \"bytes_adc\":\"%02x%02x\", \"decimal\":\"%d\",\"status\":%d,"
+            "\"nodoTipo\": %s}" ,msg.tension,msg.raw_data[1],msg.raw_data[0],msg.decimal_conv,msg.status,msg.mesh_type);
+        
         if (mwifi_is_connected() ) {
             MDF_LOGI("mwifi is connected and send info to root") ; 
             ret = mwifi_write(NULL, &data_type, data, size, true); /// send data to root 

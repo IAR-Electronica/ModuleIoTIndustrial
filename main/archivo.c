@@ -8,6 +8,7 @@
 #define NODE_LED_GPIO GPIO_NUM_19   /// led rojo 
 #define TIME_READ_SAMPLES  (10000)  ///10 seconds, time in ms 
 #define I2C_ADDRESS_SENSOR 0x48     /// i2c address_sensor 
+void getNodeType(char *nodeType, mesh_type_t mesh_type ) ; 
 
 extern QueueHandle_t xQueueReadSensor;
 
@@ -19,6 +20,7 @@ typedef struct{
     uint8_t raw_data[2] ; 
     int16_t decimal_conv ; 
     float tension; 
+    char mesh_type[5] ; 
 }msg_sensor_t ; 
 
 
@@ -28,6 +30,7 @@ SemaphoreHandle_t xMutex = NULL;
 void vTaskGetADC(void *pv){
     msg_sensor_t data_sensor_read ; 
     bool sensor_is_connected = false ; 
+    mesh_type_t nodeType;  
     ADS1115_alert_comparator_t alert = { OFF,0, 0,0 };
     ADS1115_config_t ads1115 = {
                 CHANNEL_0_GND,
@@ -48,7 +51,6 @@ void vTaskGetADC(void *pv){
         MDF_LOGI("WAIT GET MAC ADDRESS")  ; 
         vTaskDelay((1000/portTICK_RATE_MS)) ; 
     }     
-    printf("start get ADC task \r\n ") ; 
     xMutex = xSemaphoreCreateMutex();
     const TickType_t time_samples = TIME_READ_SAMPLES/portTICK_RATE_MS ; 
     uint32_t counter_send_queue_send = 0 ; 
@@ -69,8 +71,12 @@ void vTaskGetADC(void *pv){
             }
             voltage_sensor = getVoltage(data_sensor_read.raw_data,&data_sensor_read.status ) ; 
             data_sensor_read.tension = voltage_sensor ; 
-            MDF_LOGI("DATOS-SENSOR: VOLTAGE %f ; bytes_adc: %02x %02x , status: %d",   
-                data_sensor_read.tension,data_sensor_read.raw_data[0],data_sensor_read.raw_data[1],data_sensor_read.status) ; 
+            nodeType = esp_mesh_get_type() ; 
+            getNodeType(data_sensor_read.mesh_type ,nodeType) ; 
+            MDF_LOGI("DATOS-SENSOR: VOLTAGE %f ; bytes_adc: %02x %02x , status: %d ,node_type: %s",   
+                data_sensor_read.tension,data_sensor_read.raw_data[0],data_sensor_read.raw_data[1],data_sensor_read.status,data_sensor_read.mesh_type) ; 
+
+
             memcpy(&data_sensor_read.decimal_conv ,data_sensor_read.raw_data,2) ; 
         }
         xSemaphoreGive(xMutex);        ///! read sensors 
@@ -172,8 +178,26 @@ void vTaskInfoNode(void *pv){
 
 
 
-
-
+void getNodeType(char *nodeType, mesh_type_t mesh_type ){
+    const char *text[4] = {"LEAF","NODE","ROOT", "IDLE"}  ; 
+    switch(mesh_type){
+            case MESH_LEAF:
+                sprintf(nodeType ,"%s",text[0]) ;   
+                break ; 
+            case MESH_NODE:
+                sprintf(nodeType ,"%s",text[1]) ;   
+                break ; 
+            case MESH_ROOT:
+                sprintf(nodeType ,"%s",text[2]) ;   
+                break ; 
+            case MESH_IDLE:
+                sprintf(nodeType ,"%s",text[3]) ;   
+                break ; 
+            default: 
+                sprintf(nodeType ,"ERRO") ;   
+               break ;  
+        }
+}
 
  
 void vTaskToogleLeds(void *arg){
