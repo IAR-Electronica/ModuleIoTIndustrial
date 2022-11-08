@@ -154,8 +154,9 @@ static void node_write_task(void *arg)
          * @brief Send device information to mqtt server throught root node.
         */
         xQueueReceive(xQueueReadSensor,(void *) &msg , (TickType_t) portMAX_DELAY) ; 
-        size = asprintf(&data, "{\"tension\":\"%f\", \"bytes_adc\":\"%02x%02x\", \"decimal\":\"%d\",\"status\":%d,"
-            "\"nodoTipo\": %s}" ,msg.tension,msg.raw_data[1],msg.raw_data[0],msg.decimal_conv,msg.status,msg.mesh_type);
+        size = asprintf(&data, "{\"tension\":\"%f\", \"bytes_adc\":\"%02x%02x\",\"decimal\":\"%d\",\"status\":%d,"
+            "\"nodoTipo\":\"%s\"}" ,msg.tension,msg.raw_data[1],msg.raw_data[0],\
+                msg.decimal_conv,msg.status,msg.mesh_type);
         
         if (mwifi_is_connected() ) {
             MDF_LOGI("mwifi is connected and send info to root") ; 

@@ -127,7 +127,7 @@ void vTaskInfoNode(void *pv){
        printf("ssid_sta: %s   \r\n",conf_wifi_sta.sta.ssid) ; 
        printf("mac_sta: %02x %02x %02x %02x %02x %02x \r\n",mac_address_sta[0],mac_address_sta[1],mac_address_sta[2],
                                                             mac_address_sta[3], mac_address_sta[4],mac_address_sta[5]) ; 
-       printf("size mesh routing table: %d \r\n", size_table_routing_main) ; 
+       printf("size mesh routing table: %d \r\n",size_table_routing_main) ; 
        printf("size mesh routing table response: %d \r\n", size_table_routing_response) ; 
        for (int i = 0; i < size_table_routing_main; i++) 
        {   
